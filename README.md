@@ -103,8 +103,10 @@ Made with ❤️ by Neko-chan (=^･ω･^=)
 **One-liner - Cole no PowerShell como Administrador:**
 
 ```powershell
-irm https://raw.githubusercontent.com/Paulothedeveloper/WindowsVideoOptimizer/main/install.ps1 | iex
+irm https://raw.githubusercontent.com/Paulothedeveloper/WindowsVideoOptimizer/main/quick-install.ps1 | iex
 ```
+
+> 💡 **Nota:** O instalador detecta automaticamente se você não está como Admin e te ajuda a abrir corretamente!
 
 O instalador vai:
 - ✅ Verificar e instalar Git (se necessário)

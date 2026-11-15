@@ -4,6 +4,43 @@
 
 $ErrorActionPreference = "Stop"
 
+# PROTEÇÃO: Re-executar sem profile se detectar que está rodando com profile
+# Isso evita conflitos com profiles personalizados dos usuários
+if ($PROFILE -and (Test-Path $PROFILE) -and -not $env:FRAMEFORGE_NO_PROFILE) {
+    Write-Host ""
+    Write-Host "  🔧 Detectado PowerShell profile personalizado..." -ForegroundColor Yellow
+    Write-Host "     Re-executando sem profile para evitar conflitos..." -ForegroundColor Gray
+    Write-Host ""
+    
+    # Salvar script em temp e re-executar sem profile
+    $tempScript = "$env:TEMP\frameforge-install-safe.ps1"
+    $currentScript = $MyInvocation.MyCommand.ScriptBlock.ToString()
+    
+    # Adicionar flag de ambiente para evitar loop infinito
+    $safeScript = "`$env:FRAMEFORGE_NO_PROFILE = '1'" + "`n" + $currentScript
+    $safeScript | Out-File -FilePath $tempScript -Encoding UTF8 -Force
+    
+    # Re-executar sem profile
+    $params = @{
+        FilePath = "powershell.exe"
+        ArgumentList = @(
+            "-NoProfile",
+            "-ExecutionPolicy", "Bypass",
+            "-File", $tempScript
+        )
+        Verb = "RunAs"
+        Wait = $true
+    }
+    
+    try {
+        Start-Process @params
+        Remove-Item $tempScript -Force -ErrorAction SilentlyContinue
+        exit 0
+    } catch {
+        Write-Host "  ⚠️  Erro ao re-executar. Continuando com profile..." -ForegroundColor Yellow
+    }
+}
+
 # Banner
 Clear-Host
 Write-Host ""

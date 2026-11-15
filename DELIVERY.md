@@ -39,8 +39,13 @@
 
 ### Método 1: One-Liner PowerShell (RECOMENDADO)
 ```powershell
-irm https://raw.githubusercontent.com/Paulothedeveloper/WindowsVideoOptimizer/main/install.ps1 | iex
+irm https://raw.githubusercontent.com/Paulothedeveloper/WindowsVideoOptimizer/main/quick-install.ps1 | iex
 ```
+
+**Proteções automáticas:**
+- ✅ Detecta se não está como Admin e mostra instruções
+- ✅ Auto re-executa sem profile para evitar conflitos
+- ✅ Oferece abrir PowerShell Admin automaticamente
 
 **O instalador automático faz tudo:**
 - ✅ Verifica/instala Git
