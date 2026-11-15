@@ -18,15 +18,15 @@ function Send-Status {
 try {
     Send-Status "Criando ponto de restauração..."
     Enable-ComputerRestore -Drive "C:\" -ErrorAction SilentlyContinue
-    Checkpoint-Computer -Description "Video Optimizer - Antes" -RestorePointType "MODIFY_SETTINGS" -ErrorAction SilentlyContinue
-    
+    Checkpoint-Computer -Description "FrameForge - Antes" -RestorePointType "MODIFY_SETTINGS" -ErrorAction SilentlyContinue
+
     $total = $selectedOptions.Count
     $current = 0
-    
+
     foreach ($option in $selectedOptions) {
         $current++
         $percent = [int](($current / $total) * 100)
-        
+
         switch ($option) {
             'power' {
                 Send-Status "[$current/$total] Configurando Plano de Energia..."
@@ -36,14 +36,16 @@ try {
                 powercfg -change -disk-timeout-ac 0
                 powercfg -change -standby-timeout-ac 0
                 powercfg /setacvalueindex scheme_current sub_processor PROCTHROTTLEMAX 100
+                powercfg /setacvalueindex scheme_current sub_processor CPMINCORES 100 2>&1 | Out-Null
+                powercfg /setacvalueindex scheme_current sub_processor IDLEDISABLE 1 2>&1 | Out-Null
                 powercfg /setactive scheme_current
             }
-            
+
             'hibernation' {
                 Send-Status "[$current/$total] Desabilitando Hibernação..."
                 powercfg /hibernate off
             }
-            
+
             'registry' {
                 Send-Status "[$current/$total] Aplicando Otimizações de Registro..."
                 Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects" -Name "VisualFXSetting" -Value 2 -Force -ErrorAction SilentlyContinue
@@ -53,37 +55,126 @@ try {
                 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\GraphicsDrivers" -Name "HwSchMode" -Value 2 -Force -ErrorAction SilentlyContinue
                 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" -Name "SystemResponsiveness" -Value 0 -Force -ErrorAction SilentlyContinue
                 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" -Name "NetworkThrottlingIndex" -Value 0xffffffff -Force -ErrorAction SilentlyContinue
+                Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "MenuShowDelay" -Value "0" -Force -ErrorAction SilentlyContinue
+                Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "AutoEndTasks" -Value "1" -Force -ErrorAction SilentlyContinue
+                Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Serialize" -Name "StartupDelayInMSec" -Value 0 -Force -ErrorAction SilentlyContinue
             }
-            
+
             'services' {
                 Send-Status "[$current/$total] Desabilitando Serviços Desnecessários..."
-                $services = @('DiagTrack','dmwappushservice','SysMain','WSearch','XblAuthManager','XblGameSave','XboxNetApiSvc')
+                $isSSD = $false
+                try {
+                    $diskNum = (Get-Partition -DriveLetter C -ErrorAction SilentlyContinue).DiskNumber
+                    if ($null -ne $diskNum) {
+                        $media = (Get-PhysicalDisk -ErrorAction SilentlyContinue | Where-Object { $_.DeviceId -eq $diskNum }).MediaType
+                        if ($media -eq 'SSD') { $isSSD = $true }
+                    }
+                } catch {}
+
+                $services = @('DiagTrack','dmwappushservice','WSearch','XblAuthManager','XblGameSave','XboxNetApiSvc','MapsBroker','Fax','WerSvc','RetailDemo','RemoteRegistry','WalletService')
+                if ($isSSD) { $services += 'SysMain' }
                 foreach ($svc in $services) {
                     Stop-Service -Name $svc -Force -ErrorAction SilentlyContinue
                     Set-Service -Name $svc -StartupType Disabled -ErrorAction SilentlyContinue
                 }
             }
-            
+
+            'telemetry' {
+                Send-Status "[$current/$total] Reduzindo Telemetria e Rastreamento..."
+                New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection" -Force -ErrorAction SilentlyContinue | Out-Null
+                Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection" -Name "AllowTelemetry" -Value 0 -Force -ErrorAction SilentlyContinue
+                New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\AdvertisingInfo" -Force -ErrorAction SilentlyContinue | Out-Null
+                Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\AdvertisingInfo" -Name "Enabled" -Value 0 -Force -ErrorAction SilentlyContinue
+                New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Privacy" -Force -ErrorAction SilentlyContinue | Out-Null
+                Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Privacy" -Name "TailoredExperiencesWithDiagnosticDataEnabled" -Value 0 -Force -ErrorAction SilentlyContinue
+                Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Search" -Name "BingSearchEnabled" -Value 0 -Force -ErrorAction SilentlyContinue
+                Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Search" -Name "CortanaConsent" -Value 0 -Force -ErrorAction SilentlyContinue
+
+                $tasks = @(
+                    "\Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser",
+                    "\Microsoft\Windows\Application Experience\ProgramDataUpdater",
+                    "\Microsoft\Windows\Customer Experience Improvement Program\Consolidator",
+                    "\Microsoft\Windows\Customer Experience Improvement Program\UsbCeip",
+                    "\Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticDataCollector",
+                    "\Microsoft\Windows\Feedback\Siuf\DmClient",
+                    "\Microsoft\Windows\Feedback\Siuf\DmClientOnScenarioDownload"
+                )
+                foreach ($t in $tasks) {
+                    $name = Split-Path $t -Leaf
+                    $path = Split-Path $t -Parent
+                    Disable-ScheduledTask -TaskName $name -TaskPath "$path\" -ErrorAction SilentlyContinue | Out-Null
+                }
+            }
+
             'network' {
                 Send-Status "[$current/$total] Otimizando Rede..."
                 netsh int tcp set global autotuninglevel=normal 2>&1 | Out-Null
                 netsh int tcp set global chimney=enabled 2>&1 | Out-Null
                 netsh int tcp set global congestionprovider=ctcp 2>&1 | Out-Null
+                netsh int tcp set global rss=enabled 2>&1 | Out-Null
+                netsh int tcp set global ecncapability=enabled 2>&1 | Out-Null
+                Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" -Name "TcpAckFrequency" -Value 1 -Force -ErrorAction SilentlyContinue
             }
-            
+
             'temp' {
                 Send-Status "[$current/$total] Limpando Arquivos Temporários..."
                 Remove-Item -Path "$env:TEMP\*" -Recurse -Force -ErrorAction SilentlyContinue
                 Remove-Item -Path "C:\Windows\Temp\*" -Recurse -Force -ErrorAction SilentlyContinue
             }
-            
+
+            'diskcleanup' {
+                Send-Status "[$current/$total] Limpando Disco (WinSxS, Update cache, Lixeira)..."
+                Clear-RecycleBin -Force -ErrorAction SilentlyContinue
+                Stop-Service -Name wuauserv -Force -ErrorAction SilentlyContinue
+                Remove-Item -Path "$env:SystemRoot\SoftwareDistribution\Download\*" -Recurse -Force -ErrorAction SilentlyContinue
+                Start-Service -Name wuauserv -ErrorAction SilentlyContinue
+                Remove-Item -Path "$env:SystemRoot\Logs\CBS\*" -Recurse -Force -ErrorAction SilentlyContinue
+                Start-Process -FilePath "Dism.exe" -ArgumentList "/online","/Cleanup-Image","/StartComponentCleanup","/Quiet" -Wait -NoNewWindow -ErrorAction SilentlyContinue
+            }
+
+            'ssdopt' {
+                Send-Status "[$current/$total] Otimizando armazenamento (SSD/HDD)..."
+                try {
+                    $diskNum = (Get-Partition -DriveLetter C -ErrorAction SilentlyContinue).DiskNumber
+                    $media = (Get-PhysicalDisk -ErrorAction SilentlyContinue | Where-Object { $_.DeviceId -eq $diskNum }).MediaType
+                    if ($media -eq 'SSD') {
+                        Optimize-Volume -DriveLetter C -ReTrim -ErrorAction SilentlyContinue
+                        fsutil behavior set DisableLastAccess 1 2>&1 | Out-Null
+                    } else {
+                        Optimize-Volume -DriveLetter C -Defrag -ErrorAction SilentlyContinue
+                    }
+                } catch {
+                    Send-Status "Nao foi possivel detectar o tipo de disco, pulando otimizacao de armazenamento."
+                }
+            }
+
             'pagefile' {
-                Send-Status "[$current/$total] Otimizando Memória Virtual..."
+                Send-Status "[$current/$total] Otimizando Memória Virtual (PageFile)..."
+                $ramBytes = (Get-CimInstance Win32_ComputerSystem).TotalPhysicalMemory
+                $ramMB = [math]::Round($ramBytes / 1MB)
+                if ($ramMB -le 16384) {
+                    $initial = [math]::Round($ramMB * 1.5)
+                    $maximum = [math]::Round($ramMB * 2)
+                } else {
+                    $initial = 4096
+                    $maximum = 8192
+                }
+
                 $cs = Get-WmiObject Win32_ComputerSystem -EnableAllPrivileges
                 $cs.AutomaticManagedPagefile = $false
                 $cs.Put() | Out-Null
+
+                $pf = Get-WmiObject -Class Win32_PageFileSetting -ErrorAction SilentlyContinue
+                if ($pf) {
+                    $pf.InitialSize = $initial
+                    $pf.MaximumSize = $maximum
+                    $pf.Put() | Out-Null
+                } else {
+                    Set-WmiInstance -Class Win32_PageFileSetting -Arguments @{Name="C:\pagefile.sys"; InitialSize=$initial; MaximumSize=$maximum} -ErrorAction SilentlyContinue | Out-Null
+                }
+                Send-Status "PageFile configurado: $initial MB - $maximum MB (baseado em $ramMB MB de RAM)"
             }
-            
+
             'defender' {
                 Send-Status "[$current/$total] Configurando Defender..."
                 Add-MpPreference -ExclusionPath "C:\Program Files\CapCut" -ErrorAction SilentlyContinue
@@ -91,31 +182,49 @@ try {
                 Add-MpPreference -ExclusionProcess "CapCut.exe" -ErrorAction SilentlyContinue
                 Add-MpPreference -ExclusionProcess "obs64.exe" -ErrorAction SilentlyContinue
             }
-            
+
             'updates' {
                 Send-Status "[$current/$total] Configurando Windows Update..."
                 Stop-Service -Name "wuauserv" -Force -ErrorAction SilentlyContinue
                 Set-Service -Name "wuauserv" -StartupType Manual -ErrorAction SilentlyContinue
             }
-            
+
             'video' {
                 Send-Status "[$current/$total] Otimizando para Vídeo..."
                 New-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Pro Audio" -Force -ErrorAction SilentlyContinue | Out-Null
                 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Pro Audio" -Name "GPU Priority" -Value 8 -Force -ErrorAction SilentlyContinue
                 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Pro Audio" -Name "Priority" -Value 1 -Force -ErrorAction SilentlyContinue
             }
-            
+
             'background' {
                 Send-Status "[$current/$total] Desabilitando Apps em Background..."
                 Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" -Name "GlobalUserDisabled" -Value 1 -Force -ErrorAction SilentlyContinue
             }
-            
+
+            'startup' {
+                Send-Status "[$current/$total] Desabilitando itens de inicialização pesados..."
+                $heavyStartup = @('Teams','Spotify','Discord','Skype','OneDrive','CCleaner Updater','Adobe Updater Startup Utility','Steam Client Bootstrapper')
+                try {
+                    $items = Get-CimInstance Win32_StartupCommand -ErrorAction SilentlyContinue
+                    foreach ($item in $items) {
+                        foreach ($h in $heavyStartup) {
+                            if ($item.Name -like "*$h*") {
+                                $regPath = $item.Location
+                                try {
+                                    Remove-ItemProperty -Path "Registry::$regPath" -Name $item.Name -ErrorAction SilentlyContinue
+                                } catch {}
+                            }
+                        }
+                    }
+                } catch {}
+            }
+
             'boot' {
                 Send-Status "[$current/$total] Otimizando Boot..."
                 bcdedit /timeout 3 2>&1 | Out-Null
                 bcdedit /set bootux disabled 2>&1 | Out-Null
             }
-            
+
             'priority' {
                 Send-Status "[$current/$total] Configurando Prioridade Automática..."
                 $script = @'
@@ -125,26 +234,41 @@ $obs = Get-Process -Name "obs64" -ErrorAction SilentlyContinue
 if ($obs) { $obs.PriorityClass = "High" }
 '@
                 $script | Out-File -FilePath "$env:APPDATA\VideoAppsPriority.ps1" -Force
-                
+
                 $action = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-ExecutionPolicy Bypass -File `"$env:APPDATA\VideoAppsPriority.ps1`""
                 $trigger = New-ScheduledTaskTrigger -Once -At (Get-Date) -RepetitionInterval (New-TimeSpan -Minutes 5) -RepetitionDuration ([TimeSpan]::MaxValue)
                 $principal = New-ScheduledTaskPrincipal -UserId "SYSTEM" -LogonType ServiceAccount -RunLevel Highest
                 Register-ScheduledTask -TaskName "VideoAppsOptimizer" -Action $action -Trigger $trigger -Principal $principal -Force -ErrorAction SilentlyContinue | Out-Null
             }
-            
+
             'gpu' {
                 Send-Status "[$current/$total] Otimizando GPU..."
-                Set-ItemProperty -Path "HKCU:\Software\NVIDIA Corporation\Global\NVTweak\Devices\D3D" -Name "PerfLevelSrc" -Value 8738 -Force -ErrorAction SilentlyContinue
+                try {
+                    $gpus = Get-CimInstance Win32_VideoController -ErrorAction SilentlyContinue
+                    foreach ($g in $gpus) {
+                        if ($g.Name -match 'NVIDIA') {
+                            Set-ItemProperty -Path "HKCU:\Software\NVIDIA Corporation\Global\NVTweak\Devices\D3D" -Name "PerfLevelSrc" -Value 8738 -Force -ErrorAction SilentlyContinue
+                        }
+                        elseif ($g.Name -match 'AMD|Radeon') {
+                            New-Item -Path "HKLM:\SOFTWARE\AMD\CN" -Force -ErrorAction SilentlyContinue | Out-Null
+                            Set-ItemProperty -Path "HKLM:\SOFTWARE\AMD\CN" -Name "PP_GPUPowerPlay" -Value 1 -Force -ErrorAction SilentlyContinue
+                        }
+                        elseif ($g.Name -match 'Intel') {
+                            # Intel nao expoe tweak de registro publico/estavel; Hardware
+                            # Scheduling global (ja aplicado em 'registry') cobre o ganho principal.
+                        }
+                    }
+                } catch {}
             }
         }
-        
+
         Send-Progress $percent
         Start-Sleep -Milliseconds 100
     }
-    
+
     Send-Status "Otimização completa!"
     Send-Progress 100
-    
+
 } catch {
     Write-Error $_.Exception.Message
     exit 1
