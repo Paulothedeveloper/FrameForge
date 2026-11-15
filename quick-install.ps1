@@ -102,32 +102,32 @@ if (-not $isAdmin) {
 
     if ($response -eq 'S' -or $response -eq 's') {
         Write-Host ""
-        Write-Host "  🚀 Abrindo PowerShell como Administrador..." -ForegroundColor Cyan
-        Write-Host "     (Cole o comando novamente lá!)" -ForegroundColor Yellow
+        Write-Host "  🚀 Abrindo PowerShell como Administrador e instalando automaticamente..." -ForegroundColor Cyan
         Write-Host ""
 
+        # NAO so mostra o comando - EXECUTA de verdade na janela elevada.
+        # (antes so exibia e esperava o usuario colar de novo manualmente -
+        # UX ruim reportada pelo Paulo: "preciso dar dois comandos?")
         $tempScript = "$env:TEMP\frameforge-install-temp.ps1"
         $installCommand = "irm https://raw.githubusercontent.com/Paulothedeveloper/WindowsVideoOptimizer/main/quick-install.ps1 | iex"
 
+        # Este arquivo e lido do disco como ARQUIVO (-File), entao Out-File
+        # -Encoding UTF8 (que inclui BOM no PS 5.1) e o correto aqui -
+        # diferente do caso do proprio quick-install.ps1, que roda via iex/string.
         @"
 Write-Host ""
 Write-Host "  ╔══════════════════════════════════════════════════════════════╗" -ForegroundColor Magenta
 Write-Host "  ║           🎬  FRAMEFORGE - INSTALADOR  🎬                   ║" -ForegroundColor Cyan
 Write-Host "  ╚══════════════════════════════════════════════════════════════╝" -ForegroundColor Magenta
 Write-Host ""
-Write-Host "  ✅ PowerShell aberto como Administrador!" -ForegroundColor Green
+Write-Host "  ✅ PowerShell aberto como Administrador! Instalando..." -ForegroundColor Green
 Write-Host ""
-Write-Host "  📋 Cole este comando para instalar:" -ForegroundColor Cyan
-Write-Host ""
-Write-Host "  $installCommand" -ForegroundColor Green
-Write-Host ""
-Write-Host "  (Aperte Enter para fechar esta janela)" -ForegroundColor Yellow
-Read-Host
+$installCommand
 "@ | Out-File -FilePath $tempScript -Encoding UTF8
 
-        Start-Process powershell -Verb RunAs -ArgumentList "-NoExit", "-File", $tempScript
+        Start-Process powershell -Verb RunAs -ArgumentList "-NoExit", "-ExecutionPolicy", "Bypass", "-File", $tempScript
 
-        Write-Host "  ✅ Nova janela aberta! Cole o comando lá." -ForegroundColor Green
+        Write-Host "  ✅ Nova janela aberta e instalando sozinha! Acompanhe lá." -ForegroundColor Green
     }
 
     Write-Host ""
