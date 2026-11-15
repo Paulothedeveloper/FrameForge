@@ -1,24 +1,45 @@
-#Requires -RunAsAdministrator
+﻿#Requires -RunAsAdministrator
 param(
-    [string]$Options
+    [string]$Options,
+    [string]$LogFile = "$env:TEMP\frameforge-progress.log"
 )
 
 $selectedOptions = $Options -split ','
 
+# Write-Host, quando capturado via pipe redirecionado por um processo externo,
+# tem encoding imprevisivel neste PowerShell 5.1 (confirmado: corrompe acentos
+# mesmo com BOM no arquivo fonte e $OutputEncoding configurado). A escrita direta
+# em arquivo via .NET com UTF8Encoding explicito e 100% confiavel - testado e
+# confirmado byte a byte. server.js agora le este arquivo via polling.
+$utf8NoBom = New-Object System.Text.UTF8Encoding $false
+# Reseta o arquivo de log no inicio desta execucao
+[System.IO.File]::WriteAllText($LogFile, "", $utf8NoBom)
+
 function Send-Progress {
     param($Percent)
-    Write-Host "[PROGRESS:$Percent]"
+    [System.IO.File]::AppendAllText($LogFile, "[PROGRESS:$Percent]`n", $utf8NoBom)
 }
 
 function Send-Status {
     param($Message)
-    Write-Host "[STATUS:$Message]"
+    [System.IO.File]::AppendAllText($LogFile, "[STATUS:$Message]`n", $utf8NoBom)
 }
 
 try {
     Send-Status "Criando ponto de restauração..."
+    # Checkpoint-Computer pode travar indefinidamente (VSS lento/ocupado em alguns
+    # discos). Roda em Job com timeout: se nao terminar em 20s, segue a otimizacao
+    # mesmo assim em vez de travar o processo inteiro por causa do restore point.
     Enable-ComputerRestore -Drive "C:\" -ErrorAction SilentlyContinue
-    Checkpoint-Computer -Description "FrameForge - Antes" -RestorePointType "MODIFY_SETTINGS" -ErrorAction SilentlyContinue
+    $restoreJob = Start-Job -ScriptBlock {
+        Checkpoint-Computer -Description "FrameForge - Antes" -RestorePointType "MODIFY_SETTINGS" -ErrorAction SilentlyContinue
+    }
+    $restoreDone = Wait-Job $restoreJob -Timeout 20
+    if (-not $restoreDone) {
+        Send-Status "Ponto de restauracao esta demorando, continuando sem esperar..."
+        Stop-Job $restoreJob -ErrorAction SilentlyContinue
+    }
+    Remove-Job $restoreJob -Force -ErrorAction SilentlyContinue
 
     $total = $selectedOptions.Count
     $current = 0
@@ -160,19 +181,23 @@ try {
                     $maximum = 8192
                 }
 
-                $cs = Get-WmiObject Win32_ComputerSystem -EnableAllPrivileges
-                $cs.AutomaticManagedPagefile = $false
-                $cs.Put() | Out-Null
+                # Usa CIM (API moderna), nao WMI legado: Get-WmiObject/Set-WmiInstance
+                # falham silenciosamente neste tipo de sistema (confirmado em teste real -
+                # InitialSize/MaximumSize ficavam 0/0 mesmo sem erro reportado).
+                try {
+                    $cs = Get-CimInstance Win32_ComputerSystem
+                    Set-CimInstance -InputObject $cs -Property @{AutomaticManagedPagefile = $false} -ErrorAction Stop
 
-                $pf = Get-WmiObject -Class Win32_PageFileSetting -ErrorAction SilentlyContinue
-                if ($pf) {
-                    $pf.InitialSize = $initial
-                    $pf.MaximumSize = $maximum
-                    $pf.Put() | Out-Null
-                } else {
-                    Set-WmiInstance -Class Win32_PageFileSetting -Arguments @{Name="C:\pagefile.sys"; InitialSize=$initial; MaximumSize=$maximum} -ErrorAction SilentlyContinue | Out-Null
+                    $pf = Get-CimInstance Win32_PageFileSetting -ErrorAction SilentlyContinue
+                    if ($pf) {
+                        Set-CimInstance -InputObject $pf -Property @{InitialSize = $initial; MaximumSize = $maximum} -ErrorAction Stop
+                    } else {
+                        New-CimInstance -ClassName Win32_PageFileSetting -Property @{Name = "C:\pagefile.sys"; InitialSize = $initial; MaximumSize = $maximum} -ErrorAction Stop | Out-Null
+                    }
+                    Send-Status "PageFile configurado: $initial MB - $maximum MB (baseado em $ramMB MB de RAM)"
+                } catch {
+                    Send-Status "Erro ao configurar PageFile: $_"
                 }
-                Send-Status "PageFile configurado: $initial MB - $maximum MB (baseado em $ramMB MB de RAM)"
             }
 
             'defender' {
@@ -270,6 +295,6 @@ if ($obs) { $obs.PriorityClass = "High" }
     Send-Progress 100
 
 } catch {
-    Write-Error $_.Exception.Message
+    [System.IO.File]::AppendAllText($LogFile, "[ERROR:$($_.Exception.Message)]`n", $utf8NoBom)
     exit 1
 }
