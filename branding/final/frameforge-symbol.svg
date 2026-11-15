@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
+  <!-- FrameForge Final Logo - Refined Concept C -->
+  <!-- Cinema Dark + Play Red color scheme -->
+  <defs>
+    <linearGradient id="primaryGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#E11D48;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#BE123C;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <g id="frameforge-final">
+    <!-- Main F shape (bold, geometric) -->
+    <path d="M 76 76 L 76 180 M 76 76 L 164 76 M 76 124 L 148 124" 
+          fill="none" stroke="url(#primaryGradient)" stroke-width="28" 
+          stroke-linecap="round" stroke-linejoin="round"/>
+    
+    <!-- Speed trails (suggesting motion/optimization) -->
+    <g opacity="0.7">
+      <path d="M 40 84 L 68 84" stroke="url(#primaryGradient)" stroke-width="8" stroke-linecap="round"/>
+      <path d="M 32 100 L 68 100" stroke="url(#primaryGradient)" stroke-width="8" stroke-linecap="round" opacity="0.6"/>
+      <path d="M 24 116 L 68 116" stroke="url(#primaryGradient)" stroke-width="8" stroke-linecap="round"/>
+      <path d="M 32 132 L 68 132" stroke="url(#primaryGradient)" stroke-width="8" stroke-linecap="round" opacity="0.6"/>
+      <path d="M 40 148 L 68 148" stroke="url(#primaryGradient)" stroke-width="8" stroke-linecap="round"/>
+      <path d="M 48 164 L 68 164" stroke="url(#primaryGradient)" stroke-width="8" stroke-linecap="round" opacity="0.6"/>
+    </g>
+    
+    <!-- Frame corner accent (top right) -->
+    <path d="M 164 68 L 184 68 L 184 88" 
+          fill="none" stroke="url(#primaryGradient)" stroke-width="8" 
+          stroke-linecap="round" stroke-linejoin="round"/>
+    
+    <!-- Frame corner accent (bottom right) -->
+    <path d="M 184 116 L 184 136 L 164 136" 
+          fill="none" stroke="url(#primaryGradient)" stroke-width="8" 
+          stroke-linecap="round" stroke-linejoin="round"/>
+    
+    <!-- Velocity arc (dynamic motion) -->
+    <path d="M 164 76 Q 212 76, 212 124" 
+          fill="none" stroke="url(#primaryGradient)" stroke-width="10" 
+          stroke-linecap="round" opacity="0.5"/>
+  </g>
+</svg>

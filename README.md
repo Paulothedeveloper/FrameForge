@@ -1,4 +1,4 @@
-# 🎬 Windows Video Optimizer v2.0
+# <img src="branding/final/frameforge-icon.svg" width="64" height="64" align="left"/> FrameForge
 
 <div align="center">
 
@@ -7,11 +7,11 @@
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 ![Version](https://img.shields.io/badge/Version-2.0-E11D48?style=for-the-badge)
 
-**Otimizador PROFISSIONAL do Windows com Interface Web Moderna**
+**Professional Windows Optimizer for Video Production**
 
-Focado em **CapCut**, **OBS Studio**, **DaVinci Resolve** e produção de vídeo profissional
+Forge maximum performance for **CapCut**, **OBS Studio**, **DaVinci Resolve** and video editing
 
-✨ **NOVA VERSÃO**: Interface web premium + Backend Node.js + Design profissional
+✨ **Modern web interface** · **Real-time optimization** · **Cinema Dark design**
 
 Made with ❤️ by Neko-chan (=^･ω･^=)
 
@@ -98,7 +98,32 @@ Made with ❤️ by Neko-chan (=^･ω･^=)
 
 ## 📥 Instalação
 
-### Método Rápido (Recomendado)
+### 🚀 Método 1: Instalação Automática via PowerShell (RECOMENDADO)
+
+**One-liner - Cole no PowerShell como Administrador:**
+
+```powershell
+irm https://raw.githubusercontent.com/Paulothedeveloper/WindowsVideoOptimizer/main/install.ps1 | iex
+```
+
+O instalador vai:
+- ✅ Verificar e instalar Git (se necessário)
+- ✅ Verificar e instalar Node.js 14+ (se necessário)
+- ✅ Clonar o repositório em `%LOCALAPPDATA%\WindowsVideoOptimizer`
+- ✅ Instalar dependências npm automaticamente
+- ✅ Criar atalho no Desktop
+- ✅ Criar ponto de restauração do sistema
+- ✅ Perguntar se deseja executar imediatamente
+
+**Como executar:**
+1. Pressione `Win + X` e escolha **"Windows PowerShell (Admin)"** ou **"Terminal (Admin)"**
+2. Cole o comando acima
+3. Aguarde a instalação (1-3 minutos)
+4. Pronto! Use o atalho no Desktop
+
+---
+
+### 📦 Método 2: Instalação Manual (Clone do Repositório)
 1. **Clone ou baixe** este repositório
 2. Clique com o **botão direito** em `🚀 EXECUTAR AQUI.bat`
 3. Escolha **"Executar como Administrador"**

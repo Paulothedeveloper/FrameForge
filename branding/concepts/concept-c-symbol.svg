@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
+  <!-- Concept C: Abstract Speed/Frame in Motion -->
+  <g id="frameforge-c">
+    <!-- Main F shape with motion blur effect -->
+    <path d="M 80 80 L 80 176 M 80 80 L 160 80 M 80 128 L 144 128" 
+          fill="none" stroke="#000" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
+    
+    <!-- Speed lines (trailing) -->
+    <path d="M 48 88 L 72 88" stroke="#000" stroke-width="6" stroke-linecap="round" opacity="0.6"/>
+    <path d="M 40 104 L 72 104" stroke="#000" stroke-width="6" stroke-linecap="round" opacity="0.4"/>
+    <path d="M 32 120 L 72 120" stroke="#000" stroke-width="6" stroke-linecap="round" opacity="0.6"/>
+    <path d="M 40 136 L 72 136" stroke="#000" stroke-width="6" stroke-linecap="round" opacity="0.4"/>
+    <path d="M 48 152 L 72 152" stroke="#000" stroke-width="6" stroke-linecap="round" opacity="0.6"/>
+    <path d="M 56 168 L 72 168" stroke="#000" stroke-width="6" stroke-linecap="round" opacity="0.4"/>
+    
+    <!-- Frame corner details (suggesting video frame) -->
+    <path d="M 160 72 L 176 72 L 176 88" fill="none" stroke="#000" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M 176 120 L 176 136 L 160 136" fill="none" stroke="#000" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    
+    <!-- Acceleration arc -->
+    <path d="M 160 80 Q 200 80, 200 120" fill="none" stroke="#000" stroke-width="8" stroke-linecap="round" opacity="0.5"/>
+  </g>
+</svg>

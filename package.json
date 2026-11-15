@@ -1,7 +1,7 @@
 {
-  "name": "windows-video-optimizer",
+  "name": "frameforge",
   "version": "2.0.0",
-  "description": "Otimizador profissional do Windows para produção de vídeo, design e streaming",
+  "description": "Professional Windows optimizer for video production - CapCut, OBS Studio, DaVinci Resolve",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
+  <!-- Concept A: Monogram FF as Film Frame -->
+  <g id="frameforge-a">
+    <!-- Outer frame (film strip style) -->
+    <rect x="48" y="48" width="160" height="160" fill="none" stroke="#000" stroke-width="8" rx="4"/>
+    
+    <!-- Film perforation holes (left) -->
+    <rect x="56" y="68" width="12" height="12" fill="#000" rx="2"/>
+    <rect x="56" y="116" width="12" height="12" fill="#000" rx="2"/>
+    <rect x="56" y="164" width="12" height="12" fill="#000" rx="2"/>
+    
+    <!-- Film perforation holes (right) -->
+    <rect x="188" y="68" width="12" height="12" fill="#000" rx="2"/>
+    <rect x="188" y="116" width="12" height="12" fill="#000" rx="2"/>
+    <rect x="188" y="164" width="12" height="12" fill="#000" rx="2"/>
+    
+    <!-- Double F letterform (forged style) -->
+    <!-- First F -->
+    <path d="M 88 88 L 88 168 M 88 88 L 132 88 M 88 128 L 120 128" 
+          fill="none" stroke="#000" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+    
+    <!-- Second F (overlapping, offset) -->
+    <path d="M 124 88 L 124 168 M 124 88 L 168 88 M 124 128 L 156 128" 
+          fill="none" stroke="#000" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>

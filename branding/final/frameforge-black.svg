@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
+  <g id="frameforge-black">
+    <path d="M 84 76 L 84 180 M 84 76 L 172 76 M 84 124 L 156 124" 
+          fill="none" stroke="#000" stroke-width="28" 
+          stroke-linecap="round" stroke-linejoin="round"/>
+    <g opacity="0.75">
+      <line x1="44" y1="84" x2="76" y2="84" stroke="#000" stroke-width="8" stroke-linecap="round"/>
+      <line x1="36" y1="100" x2="76" y2="100" stroke="#000" stroke-width="8" stroke-linecap="round" opacity="0.65"/>
+      <line x1="28" y1="116" x2="76" y2="116" stroke="#000" stroke-width="8" stroke-linecap="round"/>
+      <line x1="36" y1="132" x2="76" y2="132" stroke="#000" stroke-width="8" stroke-linecap="round" opacity="0.65"/>
+      <line x1="44" y1="148" x2="76" y2="148" stroke="#000" stroke-width="8" stroke-linecap="round"/>
+      <line x1="52" y1="164" x2="76" y2="164" stroke="#000" stroke-width="8" stroke-linecap="round" opacity="0.65"/>
+    </g>
+    <path d="M 172 68 L 192 68 L 192 88" fill="none" stroke="#000" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M 192 116 L 192 136 L 172 136" fill="none" stroke="#000" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>

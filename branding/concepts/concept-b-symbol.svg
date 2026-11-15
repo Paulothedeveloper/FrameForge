@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
+  <!-- Concept B: Anvil/Forge Symbol with Frame Details -->
+  <g id="frameforge-b">
+    <!-- Anvil base -->
+    <rect x="80" y="180" width="96" height="20" fill="#000" rx="2"/>
+    
+    <!-- Anvil body (trapezoid) -->
+    <path d="M 72 120 L 184 120 L 176 180 L 80 180 Z" fill="#000"/>
+    
+    <!-- Anvil horn (curved top) -->
+    <path d="M 72 120 Q 72 80, 104 80 L 152 80 Q 184 80, 184 120" fill="#000"/>
+    
+    <!-- Frame perforation detail (top left) -->
+    <rect x="88" y="92" width="8" height="8" fill="#FFF" rx="1"/>
+    <rect x="88" y="108" width="8" height="8" fill="#FFF" rx="1"/>
+    
+    <!-- Frame perforation detail (top right) -->
+    <rect x="160" y="92" width="8" height="8" fill="#FFF" rx="1"/>
+    <rect x="160" y="108" width="8" height="8" fill="#FFF" rx="1"/>
+    
+    <!-- Hammer strike spark (energy lines) -->
+    <path d="M 128 60 L 128 72" stroke="#000" stroke-width="3" stroke-linecap="round"/>
+    <path d="M 112 64 L 116 72" stroke="#000" stroke-width="3" stroke-linecap="round"/>
+    <path d="M 144 64 L 140 72" stroke="#000" stroke-width="3" stroke-linecap="round"/>
+  </g>
+</svg>

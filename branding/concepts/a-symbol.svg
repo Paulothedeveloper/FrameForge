@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
+  <!-- Concept A: Bold F with frame corners (minimal, geometric) -->
+  <g id="concept-a">
+    <!-- Main F letterform - bold, geometric -->
+    <path d="M 72 64 L 72 192 M 72 64 L 168 64 M 72 120 L 152 120" 
+          fill="none" stroke="#000" stroke-width="32" 
+          stroke-linecap="square" stroke-linejoin="miter"/>
+    
+    <!-- Frame corner accents (top right) -->
+    <rect x="168" y="56" width="24" height="8" fill="#000"/>
+    <rect x="184" y="56" width="8" height="24" fill="#000"/>
+    
+    <!-- Frame corner accents (bottom right) -->
+    <rect x="168" y="112" width="24" height="8" fill="#000"/>
+    <rect x="184" y="112" width="8" height="24" fill="#000"/>
+  </g>
+</svg>
