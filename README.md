@@ -127,7 +127,7 @@ O instalador vai:
 
 ### Método 2: Instalação Manual (Clone do Repositório)
 1. **Clone ou baixe** este repositório
-2. Clique com o **botão direito** em `🚀 EXECUTAR AQUI.bat`
+2. Clique com o **botão direito** em `EXECUTAR AQUI.bat`
 3. Escolha **"Executar como Administrador"**
 4. O sistema irá:
    - Verificar permissões

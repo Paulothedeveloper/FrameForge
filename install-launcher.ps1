@@ -8,7 +8,7 @@ $Host.UI.RawUI.WindowTitle = "FrameForge Installer"
 Clear-Host
 Write-Host ""
 Write-Host "  ╔══════════════════════════════════════════════════════════════╗" -ForegroundColor Magenta
-Write-Host "  ║           🎬  FRAMEFORGE - INSTALADOR  🎬                   ║" -ForegroundColor Cyan
+Write-Host "  ║                   FRAMEFORGE - INSTALADOR                   ║" -ForegroundColor Cyan
 Write-Host "  ╚══════════════════════════════════════════════════════════════╝" -ForegroundColor Magenta
 Write-Host ""
 Write-Host "  Nya~! Preparando instalação... (=^･ω･^=)" -ForegroundColor Cyan
@@ -20,7 +20,7 @@ $isAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIde
 if (-not $isAdmin) {
     Write-Host "  ❌ ERRO: PowerShell NÃO está rodando como Administrador!" -ForegroundColor Red
     Write-Host ""
-    Write-Host "  📋 SOLUÇÃO:" -ForegroundColor Yellow
+    Write-Host "  SOLUÇÃO:" -ForegroundColor Yellow
     Write-Host ""
     Write-Host "     1. Feche esta janela" -ForegroundColor White
     Write-Host "     2. Pressione Windows + X" -ForegroundColor White
@@ -39,14 +39,14 @@ Write-Host ""
 
 # Baixar e executar instalador com proteções máximas
 try {
-    Write-Host "  📥 Baixando instalador..." -ForegroundColor Cyan
+    Write-Host "  Baixando instalador..." -ForegroundColor Cyan
     
     $installerUrl = "https://raw.githubusercontent.com/Paulothedeveloper/WindowsVideoOptimizer/main/quick-install.ps1"
     $installerScript = Invoke-RestMethod -Uri $installerUrl -UseBasicParsing
     
     Write-Host "  ✅ Instalador baixado!" -ForegroundColor Green
     Write-Host ""
-    Write-Host "  🚀 Iniciando instalação..." -ForegroundColor Cyan
+    Write-Host "  Iniciando instalação..." -ForegroundColor Cyan
     Write-Host ""
     Write-Host "  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" -ForegroundColor Gray
     Write-Host ""
@@ -65,14 +65,14 @@ try {
     Write-Host ""
     Write-Host "  ❌ ERRO DURANTE A INSTALAÇÃO!" -ForegroundColor Red
     Write-Host ""
-    Write-Host "  📝 Detalhes do erro:" -ForegroundColor Yellow
+    Write-Host "  Detalhes do erro:" -ForegroundColor Yellow
     Write-Host "     $($_.Exception.Message)" -ForegroundColor White
     Write-Host ""
-    Write-Host "  📋 Informações para debug:" -ForegroundColor Yellow
+    Write-Host "  Informações para debug:" -ForegroundColor Yellow
     Write-Host "     Linha: $($_.InvocationInfo.ScriptLineNumber)" -ForegroundColor Gray
     Write-Host "     Arquivo: $($_.InvocationInfo.ScriptName)" -ForegroundColor Gray
     Write-Host ""
-    Write-Host "  💡 SOLUÇÕES ALTERNATIVAS:" -ForegroundColor Cyan
+    Write-Host "  SOLUÇÕES ALTERNATIVAS:" -ForegroundColor Cyan
     Write-Host ""
     Write-Host "     Opção 1 - Instalação Manual:" -ForegroundColor White
     Write-Host "     1. Baixe: https://github.com/Paulothedeveloper/WindowsVideoOptimizer/archive/refs/heads/main.zip" -ForegroundColor Gray
@@ -83,7 +83,7 @@ try {
     Write-Host "     Opção 2 - Tentar novamente com logging:" -ForegroundColor White
     Write-Host "     `$DebugPreference = 'Continue'; irm ...url... | iex" -ForegroundColor Gray
     Write-Host ""
-    Write-Host "  📧 Se o erro persistir, reporte em:" -ForegroundColor Yellow
+    Write-Host "  Se o erro persistir, reporte em:" -ForegroundColor Yellow
     Write-Host "     https://github.com/Paulothedeveloper/WindowsVideoOptimizer/issues" -ForegroundColor Cyan
     Write-Host ""
 }

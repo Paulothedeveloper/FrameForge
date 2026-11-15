@@ -67,7 +67,7 @@ Clear-Host
 Write-Host ""
 Write-Host "  ╔══════════════════════════════════════════════════════════════╗" -ForegroundColor Magenta
 Write-Host "  ║                                                              ║" -ForegroundColor Magenta
-Write-Host "  ║           🎬  FRAMEFORGE - QUICK INSTALLER  🎬              ║" -ForegroundColor Cyan
+Write-Host "  ║               FRAMEFORGE - QUICK INSTALLER                  ║" -ForegroundColor Cyan
 Write-Host "  ║                                                              ║" -ForegroundColor Magenta
 Write-Host "  ║              Instalador Rápido v2.2                          ║" -ForegroundColor Magenta
 Write-Host "  ║                                                              ║" -ForegroundColor Magenta
@@ -84,7 +84,7 @@ if (-not $isAdmin) {
     Write-Host ""
     Write-Host "  Para instalar o FrameForge, você precisa de permissões de admin." -ForegroundColor White
     Write-Host ""
-    Write-Host "  📋 COMO ABRIR POWERSHELL COMO ADMINISTRADOR:" -ForegroundColor Cyan
+    Write-Host "  COMO ABRIR POWERSHELL COMO ADMINISTRADOR:" -ForegroundColor Cyan
     Write-Host ""
     Write-Host "     1. Pressione a tecla Windows (⊞)" -ForegroundColor White
     Write-Host "     2. Digite: PowerShell" -ForegroundColor White
@@ -97,12 +97,12 @@ if (-not $isAdmin) {
     Write-Host "  irm https://raw.githubusercontent.com/Paulothedeveloper/WindowsVideoOptimizer/main/quick-install.ps1 | iex" -ForegroundColor Green
     Write-Host ""
 
-    Write-Host "  💡 ATALHO: Quer que eu tente abrir o PowerShell Admin para você?" -ForegroundColor Yellow
+    Write-Host "  DICA: Quer que eu tente abrir o PowerShell Admin para você?" -ForegroundColor Yellow
     $response = Read-Host "     Digite S para Sim, N para Não"
 
     if ($response -eq 'S' -or $response -eq 's') {
         Write-Host ""
-        Write-Host "  🚀 Abrindo PowerShell como Administrador e instalando automaticamente..." -ForegroundColor Cyan
+        Write-Host "  Abrindo PowerShell como Administrador e instalando automaticamente..." -ForegroundColor Cyan
         Write-Host ""
 
         # NAO so mostra o comando - EXECUTA de verdade na janela elevada.
@@ -117,7 +117,7 @@ if (-not $isAdmin) {
         @"
 Write-Host ""
 Write-Host "  ╔══════════════════════════════════════════════════════════════╗" -ForegroundColor Magenta
-Write-Host "  ║           🎬  FRAMEFORGE - INSTALADOR  🎬                   ║" -ForegroundColor Cyan
+Write-Host "  ║                   FRAMEFORGE - INSTALADOR                   ║" -ForegroundColor Cyan
 Write-Host "  ╚══════════════════════════════════════════════════════════════╝" -ForegroundColor Magenta
 Write-Host ""
 Write-Host "  ✅ PowerShell aberto como Administrador! Instalando..." -ForegroundColor Green
@@ -230,7 +230,7 @@ Write-Host "  [5/6] Criando atalho no Desktop..." -ForegroundColor Cyan
 
 $WshShell = New-Object -ComObject WScript.Shell
 $Shortcut = $WshShell.CreateShortcut($DesktopShortcut)
-$Shortcut.TargetPath = "$InstallPath\🚀 EXECUTAR AQUI.bat"
+$Shortcut.TargetPath = "$InstallPath\EXECUTAR AQUI.bat"
 $Shortcut.WorkingDirectory = $InstallPath
 $Shortcut.IconLocation = "$InstallPath\favicon.ico"
 $Shortcut.Description = "FrameForge - Professional Windows Optimizer"
@@ -257,10 +257,10 @@ Write-Host "  ║              ✅  INSTALAÇÃO CONCLUÍDA!  ✅               
 Write-Host "  ║                                                              ║" -ForegroundColor Green
 Write-Host "  ╚══════════════════════════════════════════════════════════════╝" -ForegroundColor Green
 Write-Host ""
-Write-Host "  📁 Instalado em: $InstallPath" -ForegroundColor Cyan
-Write-Host "  🖥️  Atalho criado no Desktop" -ForegroundColor Cyan
+Write-Host "  Instalado em: $InstallPath" -ForegroundColor Cyan
+Write-Host "  Atalho criado no Desktop" -ForegroundColor Cyan
 Write-Host ""
-Write-Host "  🚀 COMO USAR:" -ForegroundColor Yellow
+Write-Host "  COMO USAR:" -ForegroundColor Yellow
 Write-Host "     1. Clique duas vezes no atalho 'FrameForge' no Desktop" -ForegroundColor White
 Write-Host "     2. Escolha 'Executar como Administrador'" -ForegroundColor White
 Write-Host "     3. Aguarde o navegador abrir automaticamente" -ForegroundColor White
@@ -277,11 +277,11 @@ $execute = Read-Host "  Deseja executar o FrameForge agora? (S/N)"
 
 if ($execute -eq 'S' -or $execute -eq 's') {
     Write-Host ""
-    Write-Host "  🚀 Iniciando FrameForge..." -ForegroundColor Cyan
+    Write-Host "  Iniciando FrameForge..." -ForegroundColor Cyan
     Write-Host ""
 
     Set-Location $InstallPath
-    Start-Process -FilePath "$InstallPath\🚀 EXECUTAR AQUI.bat" -Verb RunAs
+    Start-Process -FilePath "$InstallPath\EXECUTAR AQUI.bat" -Verb RunAs
 
     Write-Host "  ✅ FrameForge iniciado! Aguarde o navegador abrir..." -ForegroundColor Green
     Write-Host ""

@@ -60,14 +60,14 @@ irm https://raw.githubusercontent.com/Paulothedeveloper/WindowsVideoOptimizer/ma
 ```bash
 git clone https://github.com/Paulothedeveloper/WindowsVideoOptimizer.git
 cd WindowsVideoOptimizer
-# Clique com botão direito em "🚀 EXECUTAR AQUI.bat"
+# Clique com botão direito em "EXECUTAR AQUI.bat"
 # Escolha "Executar como Administrador"
 ```
 
 ### Método 3: Download ZIP
 1. Baixe: https://github.com/Paulothedeveloper/WindowsVideoOptimizer/archive/refs/heads/main.zip
 2. Extraia em qualquer pasta
-3. Execute `🚀 EXECUTAR AQUI.bat` como Administrador
+3. Execute `EXECUTAR AQUI.bat` como Administrador
 
 ---
 

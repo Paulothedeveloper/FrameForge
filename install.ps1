@@ -31,7 +31,7 @@ Clear-Host
 Write-Host ""
 Write-ColorOutput Magenta "  ╔══════════════════════════════════════════════════════════════╗"
 Write-ColorOutput Magenta "  ║                                                              ║"
-Write-ColorOutput Cyan    "  ║       🎬  WINDOWS VIDEO OPTIMIZER - INSTALLER  🎬           ║"
+Write-ColorOutput Cyan    "  ║           WINDOWS VIDEO OPTIMIZER - INSTALLER               ║"
 Write-ColorOutput Magenta "  ║                                                              ║"
 Write-ColorOutput Magenta "  ║              Instalador Automático v2.0                      ║"
 Write-ColorOutput Magenta "  ║                                                              ║"
@@ -157,7 +157,7 @@ Write-Info "[6/7] Criando atalho no desktop..."
 try {
     $WshShell = New-Object -ComObject WScript.Shell
     $Shortcut = $WshShell.CreateShortcut($DesktopShortcut)
-    $Shortcut.TargetPath = "$InstallPath\🚀 EXECUTAR AQUI.bat"
+    $Shortcut.TargetPath = "$InstallPath\EXECUTAR AQUI.bat"
     $Shortcut.WorkingDirectory = $InstallPath
     $Shortcut.Description = "Windows Video Optimizer v2.0"
     $Shortcut.IconLocation = "imageres.dll,1"
@@ -204,7 +204,7 @@ if ($execute -eq 'S' -or $execute -eq 's') {
     Start-Sleep -Seconds 2
     
     # Executar o launcher
-    Start-Process -FilePath "$InstallPath\🚀 EXECUTAR AQUI.bat" -Verb RunAs
+    Start-Process -FilePath "$InstallPath\EXECUTAR AQUI.bat" -Verb RunAs
     
     Write-Success "Launcher iniciado! Nya~! (=^･ω･^=)"
 } else {
