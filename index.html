@@ -31,7 +31,7 @@
             font-family: 'Open Sans', sans-serif;
             background: var(--bg);
             color: var(--text);
-            min-height: 100vh;
+            min-height: 100svh;
             overflow-x: hidden;
         }
 
@@ -47,38 +47,39 @@
 
         /* Header */
         header {
-            text-align: center;
-            padding: 3rem 0 2rem;
-            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1.5rem 0;
+        }
+
+        header img {
+            width: 32px;
+            height: 32px;
         }
 
         h1 {
-            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-size: 1.375rem;
             font-weight: 700;
-            background: linear-gradient(135deg, var(--text) 0%, var(--cta) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 1rem;
-            letter-spacing: -0.02em;
+            color: var(--cta);
+            letter-spacing: -0.01em;
             line-height: 1.1;
         }
 
         .subtitle {
-            font-size: 1.125rem;
+            font-size: 0.875rem;
             color: var(--text-muted);
-            margin-bottom: 2rem;
         }
 
         /* Card System */
         .card {
             background: var(--card-bg);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(248, 250, 252, 0.1);
+            border: 1px solid #0F0F0F;
             border-radius: 16px;
             padding: 2rem;
             margin-bottom: 1.5rem;
-            transition: all 200ms ease;
+            transition: border-color 200ms ease, transform 200ms ease;
         }
 
         .card:hover {
@@ -96,42 +97,43 @@
 
         .option-item {
             background: rgba(15, 15, 35, 0.5);
-            border: 2px solid rgba(248, 250, 252, 0.08);
+            border: 1px solid #0C0C0D;
             border-radius: 12px;
             padding: 1.25rem;
             display: flex;
             align-items: flex-start;
             gap: 1rem;
             cursor: pointer;
-            transition: all 200ms ease;
+            transition: border-color 200ms ease, background-color 200ms ease;
             user-select: none;
         }
 
         .option-item:hover {
-            border-color: var(--cta);
+            border-color: #282828;
             background: rgba(15, 15, 35, 0.8);
         }
 
         .option-item.active {
-            border-color: var(--cta);
-            background: rgba(225, 29, 72, 0.1);
+            border-color: rgba(248, 71, 104, 0.4);
+            background: rgba(225, 29, 72, 0.08);
         }
 
         .checkbox {
-            width: 24px;
-            height: 24px;
-            border: 2px solid var(--text-muted);
+            width: 22px;
+            height: 22px;
+            border: 1.5px solid var(--text-muted);
             border-radius: 6px;
             flex-shrink: 0;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 200ms ease;
+            color: transparent;
+            transition: border-color 200ms ease, color 200ms ease;
         }
 
         .option-item.active .checkbox {
-            background: var(--cta);
             border-color: var(--cta);
+            color: var(--cta);
         }
 
         .checkbox svg {
@@ -178,7 +180,7 @@
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
-            transition: all 200ms ease;
+            transition: background-color 200ms ease, transform 200ms ease;
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
@@ -186,20 +188,18 @@
 
         .btn-primary {
             background: var(--cta);
-            color: white;
-            box-shadow: 0 4px 16px rgba(225, 29, 72, 0.3);
+            color: var(--primary);
         }
 
         .btn-primary:hover {
             background: #BE123C;
             transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(225, 29, 72, 0.4);
         }
 
         .btn-secondary {
             background: rgba(248, 250, 252, 0.1);
             color: var(--text);
-            border: 1px solid rgba(248, 250, 252, 0.2);
+            border: 1px solid #323232;
         }
 
         .btn-secondary:hover {
@@ -227,7 +227,7 @@
 
         .progress-bar {
             height: 100%;
-            background: linear-gradient(90deg, var(--cta) 0%, #F472B6 100%);
+            background: var(--cta);
             width: 0%;
             transition: width 300ms ease;
             border-radius: 999px;
@@ -329,11 +329,11 @@
 <body>
     <div class="container">
         <header>
-            <div style="display: flex; align-items: center; justify-content: center; gap: 2rem; margin-bottom: 1rem;">
-                <img src="branding/final/frameforge-icon.svg" alt="FrameForge Logo" style="width: 80px; height: 80px;">
+            <img src="branding/final/frameforge-icon.svg" alt="FrameForge Logo">
+            <div>
                 <h1>FrameForge</h1>
+                <p class="subtitle">Otimizador profissional para CapCut, OBS Studio e produção de vídeo</p>
             </div>
-            <p class="subtitle">Otimizador profissional para CapCut, OBS Studio e produção de vídeo</p>
         </header>
 
         <main>
@@ -383,14 +383,17 @@
                     Otimização Completa!
                 </div>
                 <ul class="results-list" id="results-list"></ul>
-                <p style="margin-top: 1.5rem; color: var(--warning);">
-                    ⚠️ Reinicie o computador para aplicar todas as alterações
+                <p style="margin-top: 1.5rem; color: var(--warning); display: flex; align-items: center; gap: 0.5rem;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0">
+                        <path d="M12 9v4m0 4h.01M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Reinicie o computador para aplicar todas as alterações
                 </p>
             </div>
         </main>
 
         <footer>
-            Made with <span style="color: var(--cta);">♥</span> by Neko-chan · 
+            Made with FrameForge · 
             <a href="https://github.com/Paulothedeveloper/FrameForge" target="_blank">GitHub</a>
         </footer>
     </div>
@@ -431,7 +434,7 @@
             div.innerHTML = `
                 <div class="checkbox">
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M20 6L9 17L4 12" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </div>
                 <div class="option-content">

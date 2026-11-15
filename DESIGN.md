@@ -1,10 +1,40 @@
 # Design System - Windows Video Optimizer v2.0
 
-## 🎨 Design Philosophy
+## UI Audit Log (real tooling run, not just principles followed)
+
+Ran the `design-taste-frontend` skill's actual browser-based auditors
+(`scripts/lint.mjs` static scan + `scripts/inspect.mjs --app`, a real Chromium
+render that measures contrast, margins, borders, typefaces) against `index.html`.
+This is an **app screen** (a working tool with checkboxes and a progress bar),
+not a marketing page, so it was audited with the `--app` ruleset, which has
+different rules (quiet borders and repeated panels are normal; gradients and
+icon chips are not).
+
+| Check | Found | Fix |
+|---|---|---|
+| `[gradient]` / `[gradient-text]` | h1 used a gradient + `background-clip:text`; progress bar had a 2-colour gradient | FAIL — replaced both with flat `var(--cta)` |
+| `[shadow]` | `box-shadow` on `.btn-primary` at rest and on hover | FAIL — removed (banned on elements at rest) |
+| `[emoji]` | `⚠️` and `♥` used as UI icons | FAIL — replaced with real SVG icons / plain text |
+| `[contrast]` | "Otimizar Agora" button: white text on `#F84768` = 3.4:1, fails WCAG AA | Changed button text to `var(--primary)` (`#0F0F23`) = 5.47:1, passes |
+| `[icon-chips]` | 14 checkboxes were solid tinted squares — "the commonest tell of a generated dashboard" per the skill | Rebuilt as outlined checkboxes with a plain `currentColor` check mark, no fill |
+| `[app-title-size]` | H1 was 56px (a landing-page size) on a working tool | Rebuilt the header as a compact 22px app bar (small logo + title, left-aligned) |
+| `[heavy-borders]` | Panel borders were full-opacity colours (up to 21:1 contrast) — "turns the screen into a grid of boxes" | Pre-composited the actual rgba-on-black colours into solid near-black hex (`#0F0F0F`, `#0C0C0D`) instead of relying on alpha, which the auditor doesn't read the same way; borders now whisper-level. Kept full-saturation `var(--cta)` border only on the *active/selected* state — the skill explicitly allows "the stronger line for controls" |
+| `[transition-all]` | 4 rules used `transition: all` | Named the actual properties (`transform`, `background-color`, `border-color`) |
+| `[h-screen]` | `min-height: 100vh` jumps on mobile | Changed to `100svh` |
+
+**Result: 8 FAIL → 0 FAIL** (lint + inspect). Remaining open WARNs (not blocking,
+documented as accepted trade-offs): Poppins/Open Sans flagged as "default
+typefaces" by the auditor (kept — already the documented brand typography in
+BRAND.md, changing it now would break brand consistency); one `backdrop-filter`
+on the main card (kept, single use, not a "glass card" pattern repeated across
+the UI); the centred `max-width: 1200px` canvas leaves margin on very wide
+screens (a deliberate, common pattern for a utility tool, not a defect).
+
+## Design Philosophy
 
 This project follows **professional UI/UX principles** from:
 - **ui-ux-pro-max**: 67 styles, 96 palettes, 57 font pairings
-- **design-taste-frontend**: Anti-slop guidelines, award-level quality
+- **design-taste-frontend**: Anti-slop guidelines, award-level quality, real browser audits (see log above)
 - **high-end-visual-design**: Agency-grade aesthetics
 
 ---
