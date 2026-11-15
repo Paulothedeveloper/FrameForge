@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
-  <g id="frameforge-white">
+  <title>FrameForge</title>
+  <g id="frameforge-white" transform="translate(18,4)">
     <path d="M 84 76 L 84 180 M 84 76 L 172 76 M 84 124 L 156 124" 
           fill="none" stroke="#FFF" stroke-width="28" 
           stroke-linecap="round" stroke-linejoin="round"/>

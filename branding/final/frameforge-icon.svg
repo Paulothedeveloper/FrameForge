@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
+  <title>FrameForge</title>
   <!-- FrameForge Final Symbol - Play Red with Cinema Dark accent -->
-  <g id="frameforge-symbol">
+  <!-- translate(8,4): optical centring fix from logo-design skill's svg_audit.py
+       (original margins L28/R44/T68/B76 -> now symmetric L36/R36/T72/B72) -->
+  <g id="frameforge-symbol" transform="translate(8,4)">
     <!-- Main F - bold, round caps for friendliness -->
     <path d="M 84 76 L 84 180 M 84 76 L 172 76 M 84 124 L 156 124" 
           fill="none" stroke="#F84768" stroke-width="28" 

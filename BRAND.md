@@ -15,13 +15,31 @@ The logo represents speed, optimization, and professional video production.
 
 ### Primary Logo
 - `frameforge-icon.svg` - Full color symbol (Cinema Dark + Play Red)
-- `frameforge-horizontal.svg` - Full lockup with wordmark
+- `frameforge-horizontal.svg` - Full lockup, wordmark in light text **(dark backgrounds only)**
+- `frameforge-horizontal-light-bg.svg` - Same lockup, wordmark in Deep Indigo **(light/white backgrounds)**
 
 ### Monochrome Versions
 - `frameforge-black.svg` - For light backgrounds
 - `frameforge-white.svg` - For dark backgrounds (primary use)
 
 ---
+
+## Logo Design Process (audited with the `logo-design` skill)
+
+All four SVGs above were run through the skill's real tooling (`scripts/svg_audit.py`,
+`scripts/render_png.py`, `scripts/preview_sheet.py`), not just written by hand. Findings and fixes:
+
+| Check | Found | Fix |
+|---|---|---|
+| Optical centring (`frameforge-icon.svg`) | Margins L28/R44/T68/B76 (off-centre) | `translate(8,4)` → symmetric L36/R36/T72/T72. Score 94→97/100 |
+| Optical centring (black/white monochrome) | Margins L28/R64/T68/B76 | `translate(18,4)` → symmetric L46/R46/T72/T72. Score →97/100 |
+| Live `<text>` in `frameforge-horizontal.svg` | **FAIL**: wordmark used `<text>`/`<tspan>` — breaks if Poppins isn't installed on the viewer's machine | Rebuilt the wordmark as real outlined paths, extracted from the official Poppins Bold TTF (Google Fonts, SIL OFL) with `text-to-svg`. Score 71→96/100, FAIL cleared |
+| Light-background readability | Rendering on white: **"Frame" (set in `#F8FAFC`) was nearly invisible** — the lockup was only ever tested visually against dark backgrounds | New `frameforge-horizontal-light-bg.svg` variant with "Frame" in `#1E1B4B`; verified side-by-side with `preview_sheet.py` at 96px/32px, one-colour and reversed |
+| Missing `<title>` (accessibility) | All 4 files had none | Added `<title>FrameForge</title>` |
+| 16px legibility | F silhouette stays legible; speed-trail lines, corner brackets and the velocity arc disappear at 16-32px (known, accepted trade-off) | None needed — the core mark (the F) is what must survive, and it does |
+
+Remaining open items (INFO-level, not blocking): strokes are not yet expanded to filled outlines
+(fine for digital use, matters for print/embroidery); the mark fills a modest % of its canvas.
 
 ## Color Palette
 
