@@ -5,13 +5,13 @@
 ![Windows](https://img.shields.io/badge/Windows-10%2F11-0078D6?style=for-the-badge&logo=windows&logoColor=white)
 ![Node.js](https://img.shields.io/badge/Node.js-14+-339933?style=for-the-badge&logo=node.js&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
-![Version](https://img.shields.io/badge/Version-2.0-E11D48?style=for-the-badge)
+![Version](https://img.shields.io/badge/Version-2.0-F84768?style=for-the-badge)
 
 **Professional Windows Optimizer for Video Production**
 
 Forge maximum performance for **CapCut**, **OBS Studio**, **DaVinci Resolve** and video editing
 
-✨ **Modern web interface** · **Real-time optimization** · **Cinema Dark design**
+**Modern web interface** · **Real-time optimization** · **Cinema Dark design**
 
 Made with ❤️ by Neko-chan (=^･ω･^=)
 
@@ -19,9 +19,9 @@ Made with ❤️ by Neko-chan (=^･ω･^=)
 
 ---
 
-## 🚀 Características
+## Características
 
-### 🎨 Interface Web Moderna (NOVO v2.0)
+### Interface Web Moderna (NOVO v2.0)
 - **Design Profissional** - Cinema Dark + Play Red palette
 - **Soft UI Evolution** - Modern aesthetics, improved contrast
 - **Typography Premium** - Poppins + Open Sans
@@ -30,19 +30,19 @@ Made with ❤️ by Neko-chan (=^･ω･^=)
 - **Responsive Design** - Desktop, tablet e mobile
 - **Real-time Progress** - Acompanhamento em tempo real via SSE
 
-### ⚡ Performance Máxima
+### Performance Máxima
 - **Plano de Energia Otimizado** - Máximo desempenho sempre ativo
 - **CPU Prioritizada** - Processos em primeiro plano com prioridade máxima
 - **GPU Acelerada** - Hardware Scheduling habilitado
 - **Memória Otimizada** - PageFile configurado perfeitamente
 
-### 🎥 Específico para Vídeo
+### Específico para Vídeo
 - **CapCut & OBS Studio** - Prioridade HIGH automática
 - **MMCSS Otimizado** - Sistema de agendamento multimídia configurado
 - **GPU Priority Level 8** - Máxima prioridade gráfica
 - **Zero Throttling** - Rede sem limitações
 
-### 🛡️ Seguro e Reversível
+### Seguro e Reversível
 - ✅ **Ponto de Restauração Automático**
 - ✅ **Preserva Periféricos** (áudio, vídeo, USB)
 - ✅ **Interface Gráfica Intuitiva**
@@ -50,7 +50,7 @@ Made with ❤️ by Neko-chan (=^･ω･^=)
 
 ---
 
-## 📦 O que é Otimizado?
+## O que é Otimizado?
 
 ### 1️⃣ Sistema
 - [x] Plano de energia máximo desempenho
@@ -86,7 +86,7 @@ Made with ❤️ by Neko-chan (=^･ω･^=)
 
 ---
 
-## 🖥️ Requisitos
+## Requisitos
 
 - **Windows 10** ou **Windows 11**
 - **Node.js 14+** ([Download aqui](https://nodejs.org))
@@ -96,9 +96,9 @@ Made with ❤️ by Neko-chan (=^･ω･^=)
 
 ---
 
-## 📥 Instalação
+## Instalação
 
-### 🚀 Método 1: Instalação Automática via PowerShell (RECOMENDADO)
+### Método 1: Instalação Automática via PowerShell (RECOMENDADO)
 
 **One-liner - Cole no PowerShell como Administrador:**
 
@@ -123,7 +123,7 @@ O instalador vai:
 
 ---
 
-### 📦 Método 2: Instalação Manual (Clone do Repositório)
+### Método 2: Instalação Manual (Clone do Repositório)
 1. **Clone ou baixe** este repositório
 2. Clique com o **botão direito** em `🚀 EXECUTAR AQUI.bat`
 3. Escolha **"Executar como Administrador"**
@@ -147,7 +147,7 @@ node server.js
 
 ---
 
-## 🎯 Como Usar
+## Como Usar
 
 ### Interface Web Moderna
 
@@ -204,28 +204,28 @@ node server.js
 
 ---
 
-## ⚠️ Avisos Importantes
+## Avisos Importantes
 
-### ✅ O QUE FAZ
+### O QUE FAZ
 - Otimiza profundamente o Windows
 - Melhora drasticamente a performance
 - Configura sistema para produção de vídeo
 - **Cria ponto de restauração automático**
 
-### ⚠️ O QUE NÃO FAZ
+### O QUE NÃO FAZ
 - **NÃO** remove drivers
 - **NÃO** mexe em periféricos de áudio/vídeo
 - **NÃO** desinstala programas
 - **NÃO** altera arquivos pessoais
 
-### 🔒 Segurança
+### Segurança
 - Windows Update fica em **modo manual** (você controla)
 - Windows Defender **permanece ativo** (com exclusões para CapCut/OBS)
 - Todos os periféricos **preservados**
 
 ---
 
-## 🔄 Como Reverter
+## Como Reverter
 
 ### Método 1: Ponto de Restauração
 1. Pressione `Win + R`
@@ -245,9 +245,9 @@ powercfg /setactive 381b4222-f694-41f0-9685-ff5bb260df2e
 
 ---
 
-## 🎯 Aplicativos Suportados
+## Aplicativos Suportados
 
-### ✅ Totalmente Otimizado
+### Totalmente Otimizado
 - **CapCut** (Prioridade HIGH)
 - **OBS Studio** (Prioridade HIGH)
 - **DaVinci Resolve**
@@ -257,7 +257,7 @@ powercfg /setactive 381b4222-f694-41f0-9685-ff5bb260df2e
 - **Filmora**
 - **Streamlabs OBS**
 
-### ✅ Melhorias Gerais
+### Melhorias Gerais
 - Todos os editores de vídeo
 - Software de transmissão
 - Aplicativos de design (Photoshop, Illustrator)
@@ -265,7 +265,7 @@ powercfg /setactive 381b4222-f694-41f0-9685-ff5bb260df2e
 
 ---
 
-## 📊 Benchmarks
+## Benchmarks
 
 ### Antes vs Depois (Testes Reais)
 
@@ -281,7 +281,7 @@ powercfg /setactive 381b4222-f694-41f0-9685-ff5bb260df2e
 
 ---
 
-## 🛠️ Troubleshooting
+## Troubleshooting
 
 ### PowerShell não abre?
 ```powershell
@@ -301,7 +301,7 @@ Set-ExecutionPolicy Unrestricted -Force
 
 ---
 
-## 🤝 Contribuindo
+## Contribuindo
 
 Contribuições são bem-vindas! (=^･ω･^=)
 
@@ -313,7 +313,7 @@ Contribuições são bem-vindas! (=^･ω･^=)
 
 ---
 
-## 📝 Changelog
+## Changelog
 
 ### v2.0.0 (2025) - PROFESSIONAL EDITION ✨
 - 🎨 **NOVA** Interface Web Moderna
@@ -346,7 +346,7 @@ Contribuições são bem-vindas! (=^･ω･^=)
 
 ---
 
-## 📜 Licença
+## Licença
 
 Este projeto está sob a licença **MIT**.
 
@@ -354,7 +354,7 @@ Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
 ---
 
-## 👤 Autor
+## Autor
 
 **Neko-chan** (=^･ω･^=)
 
@@ -363,7 +363,7 @@ Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
 ---
 
-## ⭐ Apoie o Projeto
+## Apoie o Projeto
 
 Se este otimizador ajudou você:
 - ⭐ Dê uma **estrela** no GitHub
@@ -372,7 +372,7 @@ Se este otimizador ajudou você:
 
 ---
 
-## 🎬 FAQ
+## FAQ
 
 ### É seguro usar?
 **Sim!** O script cria um ponto de restauração antes de qualquer mudança.

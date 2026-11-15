@@ -29,7 +29,7 @@ The logo represents speed, optimization, and professional video production.
 
 | Color | HEX | RGB | Use |
 |-------|-----|-----|-----|
-| **Play Red** | `#E11D48` | `225, 29, 72` | Primary brand color, CTA buttons, accents |
+| **Play Red** | `#F84768` | `248, 71, 104` | Primary CTA, accents (WCAG AA: 5.47:1) |
 | **Play Red Dark** | `#BE123C` | `190, 18, 60` | Hover states, gradients |
 | **Cinema Dark** | `#0F0F23` | `15, 15, 35` | Primary dark, cards |
 | **Deep Indigo** | `#1E1B4B` | `30, 27, 75` | Secondary dark, accents |

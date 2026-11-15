@@ -4,17 +4,17 @@
   <g id="frameforge-symbol">
     <!-- Main F - bold, round caps for friendliness -->
     <path d="M 84 76 L 84 180 M 84 76 L 172 76 M 84 124 L 156 124" 
-          fill="none" stroke="#E11D48" stroke-width="28" 
+          fill="none" stroke="#F84768" stroke-width="28" 
           stroke-linecap="round" stroke-linejoin="round"/>
     
     <!-- Speed trails (suggesting optimization/performance) -->
     <g opacity="0.75">
-      <line x1="44" y1="84" x2="76" y2="84" stroke="#E11D48" stroke-width="8" stroke-linecap="round"/>
-      <line x1="36" y1="100" x2="76" y2="100" stroke="#E11D48" stroke-width="8" stroke-linecap="round" opacity="0.65"/>
-      <line x1="28" y1="116" x2="76" y2="116" stroke="#E11D48" stroke-width="8" stroke-linecap="round"/>
-      <line x1="36" y1="132" x2="76" y2="132" stroke="#E11D48" stroke-width="8" stroke-linecap="round" opacity="0.65"/>
-      <line x1="44" y1="148" x2="76" y2="148" stroke="#E11D48" stroke-width="8" stroke-linecap="round"/>
-      <line x1="52" y1="164" x2="76" y2="164" stroke="#E11D48" stroke-width="8" stroke-linecap="round" opacity="0.65"/>
+      <line x1="44" y1="84" x2="76" y2="84" stroke="#F84768" stroke-width="8" stroke-linecap="round"/>
+      <line x1="36" y1="100" x2="76" y2="100" stroke="#F84768" stroke-width="8" stroke-linecap="round" opacity="0.65"/>
+      <line x1="28" y1="116" x2="76" y2="116" stroke="#F84768" stroke-width="8" stroke-linecap="round"/>
+      <line x1="36" y1="132" x2="76" y2="132" stroke="#F84768" stroke-width="8" stroke-linecap="round" opacity="0.65"/>
+      <line x1="44" y1="148" x2="76" y2="148" stroke="#F84768" stroke-width="8" stroke-linecap="round"/>
+      <line x1="52" y1="164" x2="76" y2="164" stroke="#F84768" stroke-width="8" stroke-linecap="round" opacity="0.65"/>
     </g>
     
     <!-- Frame corner accent (top right) - suggesting video frame -->

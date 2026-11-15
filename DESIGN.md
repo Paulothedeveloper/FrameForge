@@ -42,7 +42,7 @@ This project follows **professional UI/UX principles** from:
 ```css
 --primary: #0F0F23      /* Cinema Dark */
 --secondary: #1E1B4B    /* Deep Indigo */
---cta: #E11D48          /* Play Red */
+--cta: #F84768          /* Play Red (WCAG AA: 5.47:1) */
 ```
 
 ### Background & Text
@@ -61,7 +61,7 @@ This project follows **professional UI/UX principles** from:
 
 ### Color Theory
 - **Cinema Dark** (#0F0F23) → Professional, premium feel
-- **Play Red** (#E11D48) → Action, urgency, video theme
+- **Play Red** (#F84768) → Action, urgency, video theme (WCAG AA: 5.47:1)
 - **Contrast Ratio**: Minimum 4.5:1 (WCAG AA compliant)
 
 ---
