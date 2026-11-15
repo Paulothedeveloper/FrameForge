@@ -1,4 +1,4 @@
-﻿# FrameForge - Instalador Rápido
+# FrameForge - Instalador Rápido
 # Execute este comando no PowerShell como Administrador:
 # irm https://raw.githubusercontent.com/Paulothedeveloper/WindowsVideoOptimizer/main/quick-install.ps1 | iex
 
