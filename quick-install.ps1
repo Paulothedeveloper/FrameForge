@@ -131,8 +131,12 @@ $DesktopShortcut = "$env:USERPROFILE\Desktop\FrameForge.lnk"
 # Verificar Git
 Write-Host "  [1/6] Verificando Git..." -ForegroundColor Cyan
 try {
-    $gitVersion = git --version 2>$null
-    Write-Host "  ✅ Git encontrado: $gitVersion" -ForegroundColor Green
+    $gitVersion = git --version 2>&1
+    if ($LASTEXITCODE -eq 0) {
+        Write-Host "  ✅ Git encontrado: $gitVersion" -ForegroundColor Green
+    } else {
+        throw "Git não está no PATH"
+    }
 } catch {
     Write-Host "  ⚠️  Git não encontrado. Instalando..." -ForegroundColor Yellow
     
@@ -154,8 +158,12 @@ try {
 Write-Host ""
 Write-Host "  [2/6] Verificando Node.js..." -ForegroundColor Cyan
 try {
-    $nodeVersion = node --version 2>$null
-    Write-Host "  ✅ Node.js encontrado: $nodeVersion" -ForegroundColor Green
+    $nodeVersion = node --version 2>&1
+    if ($LASTEXITCODE -eq 0) {
+        Write-Host "  ✅ Node.js encontrado: $nodeVersion" -ForegroundColor Green
+    } else {
+        throw "Node.js não está no PATH"
+    }
 } catch {
     Write-Host "  ⚠️  Node.js não encontrado. Instalando..." -ForegroundColor Yellow
     
@@ -179,17 +187,32 @@ Write-Host "  [3/6] Clonando repositório FrameForge..." -ForegroundColor Cyan
 
 if (Test-Path $InstallPath) {
     Write-Host "     Removendo instalação anterior..." -ForegroundColor Gray
-    Remove-Item -Path $InstallPath -Recurse -Force
+    Remove-Item -Path $InstallPath -Recurse -Force -ErrorAction Stop
 }
 
-git clone $RepoUrl $InstallPath 2>&1 | Out-Null
+Write-Host "     De: $RepoUrl" -ForegroundColor Gray
+Write-Host "     Para: $InstallPath" -ForegroundColor Gray
+
+# Git clone SEM Out-Null para ver erros reais
+$gitOutput = git clone $RepoUrl $InstallPath 2>&1
+
+if ($LASTEXITCODE -ne 0) {
+    throw "Git clone falhou. Saída: $gitOutput"
+}
+
 Write-Host "  ✅ Repositório clonado!" -ForegroundColor Green
 
 # Instalar dependências
 Write-Host ""
 Write-Host "  [4/6] Instalando dependências npm..." -ForegroundColor Cyan
 Set-Location $InstallPath
-npm install --silent 2>&1 | Out-Null
+
+$npmOutput = npm install --silent 2>&1
+
+if ($LASTEXITCODE -ne 0) {
+    throw "npm install falhou. Saída: $npmOutput"
+}
+
 Write-Host "  ✅ Dependências instaladas!" -ForegroundColor Green
 
 # Criar atalho
