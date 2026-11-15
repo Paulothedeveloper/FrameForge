@@ -1,19 +1,17 @@
 @echo off
-:: Windows Video Optimizer - Quick Launcher
+:: Windows Video Optimizer v2.0 - Professional Edition
 :: By Neko-chan (=^･ω･^=)
 
-title Windows Video Optimizer Launcher - Nya~!
-color 0B
+title Windows Video Optimizer v2.0 - Launcher
+color 0E
 
 echo.
 echo  ================================================================
-echo    WINDOWS VIDEO OPTIMIZER - QUICK LAUNCHER
-echo    Otimizador para CapCut, OBS Studio e Producao de Video
+echo    WINDOWS VIDEO OPTIMIZER v2.0 - PROFESSIONAL EDITION
+echo    Interface Moderna Web + Backend Node.js
 echo  ================================================================
 echo.
 echo  Nya~! (=^･ω･^=)
-echo.
-echo  [*] Verificando permissoes de Administrador...
 echo.
 
 :: Verificar se está rodando como admin
@@ -30,21 +28,49 @@ if %errorLevel% NEQ 0 (
 
 echo  [OK] Permissoes verificadas! Nya~!
 echo.
-echo  [*] Iniciando Windows Video Optimizer...
-echo.
-timeout /t 2 /nobreak >nul
 
-:: Executar o script PowerShell
-PowerShell -NoProfile -ExecutionPolicy Bypass -File "%~dp0WindowsVideoOptimizer.ps1"
-
-if %errorLevel% EQU 0 (
+:: Verificar Node.js
+where node >nul 2>&1
+if %errorLevel% NEQ 0 (
+    echo  [ERRO] Node.js nao encontrado!
     echo.
-    echo  [OK] Processo concluido com sucesso! Nya~!
-) else (
+    echo  [*] Instale Node.js de: https://nodejs.org
     echo.
-    echo  [ERRO] Algo deu errado. Codigo: %errorLevel%
+    pause
+    exit /b 1
 )
 
+echo  [OK] Node.js encontrado!
 echo.
-pause
-exit /b 0
+
+:: Instalar dependências se necessário
+if not exist node_modules (
+    echo  [*] Instalando dependencias pela primeira vez...
+    call npm install
+    echo.
+)
+
+echo  [*] Iniciando servidor...
+echo.
+echo  ============================================
+echo   Interface Web: http://localhost:3000
+echo   Aguarde o navegador abrir automaticamente!
+echo  ============================================
+echo.
+
+:: Iniciar servidor
+start /B node server.js
+
+:: Aguardar 2 segundos e abrir navegador
+timeout /t 2 /nobreak >nul
+start http://localhost:3000
+
+echo.
+echo  [OK] Servidor iniciado! A interface foi aberta no navegador.
+echo.
+echo  [*] Mantenha esta janela ABERTA enquanto usa o otimizador!
+echo  [*] Pressione Ctrl+C para parar o servidor
+echo.
+
+:: Manter janela aberta
+pause >nul

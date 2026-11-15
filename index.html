@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Windows Video Optimizer - Otimizador Profissional</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0F0F23;
+            --secondary: #1E1B4B;
+            --cta: #E11D48;
+            --bg: #000000;
+            --text: #F8FAFC;
+            --text-muted: #94A3B8;
+            --card-bg: rgba(30, 27, 75, 0.3);
+            --success: #10B981;
+            --warning: #F59E0B;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 3rem 0 2rem;
+            position: relative;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--text) 0%, var(--cta) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+
+        .subtitle {
+            font-size: 1.125rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        /* Card System */
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(248, 250, 252, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            transition: all 200ms ease;
+        }
+
+        .card:hover {
+            border-color: rgba(248, 250, 252, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Options Grid */
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .option-item {
+            background: rgba(15, 15, 35, 0.5);
+            border: 2px solid rgba(248, 250, 252, 0.08);
+            border-radius: 12px;
+            padding: 1.25rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            cursor: pointer;
+            transition: all 200ms ease;
+            user-select: none;
+        }
+
+        .option-item:hover {
+            border-color: var(--cta);
+            background: rgba(15, 15, 35, 0.8);
+        }
+
+        .option-item.active {
+            border-color: var(--cta);
+            background: rgba(225, 29, 72, 0.1);
+        }
+
+        .checkbox {
+            width: 24px;
+            height: 24px;
+            border: 2px solid var(--text-muted);
+            border-radius: 6px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 200ms ease;
+        }
+
+        .option-item.active .checkbox {
+            background: var(--cta);
+            border-color: var(--cta);
+        }
+
+        .checkbox svg {
+            width: 16px;
+            height: 16px;
+            opacity: 0;
+            transition: opacity 150ms ease;
+        }
+
+        .option-item.active .checkbox svg {
+            opacity: 1;
+        }
+
+        .option-content {
+            flex: 1;
+        }
+
+        .option-title {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            color: var(--text);
+        }
+
+        .option-desc {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* Buttons */
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            font-family: 'Poppins', sans-serif;
+            padding: 0.875rem 2rem;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 200ms ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--cta);
+            color: white;
+            box-shadow: 0 4px 16px rgba(225, 29, 72, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: #BE123C;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(225, 29, 72, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(248, 250, 252, 0.1);
+            color: var(--text);
+            border: 1px solid rgba(248, 250, 252, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(248, 250, 252, 0.15);
+        }
+
+        /* Progress */
+        .progress-container {
+            margin: 2rem 0;
+            display: none;
+        }
+
+        .progress-container.active {
+            display: block;
+        }
+
+        .progress-bar-bg {
+            width: 100%;
+            height: 8px;
+            background: rgba(248, 250, 252, 0.1);
+            border-radius: 999px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--cta) 0%, #F472B6 100%);
+            width: 0%;
+            transition: width 300ms ease;
+            border-radius: 999px;
+        }
+
+        .status-text {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9375rem;
+        }
+
+        /* Results */
+        .results {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            display: none;
+        }
+
+        .results.active {
+            display: block;
+        }
+
+        .results-title {
+            color: var(--success);
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .results-list {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .results-list li {
+            padding: 0.5rem 0;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .results-list li::before {
+            content: "";
+            width: 4px;
+            height: 4px;
+            background: var(--success);
+            border-radius: 50%;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 0 2rem;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        footer a {
+            color: var(--cta);
+            text-decoration: none;
+            transition: color 200ms ease;
+        }
+
+        footer a:hover {
+            color: #F472B6;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .options-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .btn-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Windows Video Optimizer</h1>
+            <p class="subtitle">Otimizador profissional para CapCut, OBS Studio e produção de vídeo</p>
+        </header>
+
+        <main>
+            <div class="card">
+                <h2 style="margin-bottom: 1.5rem; font-size: 1.5rem;">Selecione as Otimizações</h2>
+                <div class="options-grid" id="options-grid">
+                    <!-- Options will be injected here -->
+                </div>
+            </div>
+
+            <div class="btn-group">
+                <button class="btn btn-secondary" id="select-all">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16.667 5L7.5 14.167 3.333 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Selecionar Tudo
+                </button>
+                <button class="btn btn-secondary" id="deselect-all">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15 5L5 15M5 5L15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    Desselecionar Tudo
+                </button>
+            </div>
+
+            <div style="text-align: center;">
+                <button class="btn btn-primary" id="optimize-btn">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 3.333v13.334M3.333 10h13.334" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    Otimizar Agora
+                </button>
+            </div>
+
+            <div class="progress-container" id="progress-container">
+                <div class="progress-bar-bg">
+                    <div class="progress-bar" id="progress-bar"></div>
+                </div>
+                <p class="status-text" id="status-text">Preparando otimização...</p>
+            </div>
+
+            <div class="results" id="results">
+                <div class="results-title">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Otimização Completa!
+                </div>
+                <ul class="results-list" id="results-list"></ul>
+                <p style="margin-top: 1.5rem; color: var(--warning);">
+                    ⚠️ Reinicie o computador para aplicar todas as alterações
+                </p>
+            </div>
+        </main>
+
+        <footer>
+            Made with <span style="color: var(--cta);">♥</span> by Neko-chan · 
+            <a href="https://github.com/Paulothedeveloper/WindowsVideoOptimizer" target="_blank">GitHub</a>
+        </footer>
+    </div>
+
+    <script>
+        const options = [
+            { id: 'power', title: 'Plano de Energia Máximo', desc: 'Configura para máximo desempenho', checked: true },
+            { id: 'hibernation', title: 'Desabilitar Hibernação', desc: 'Libera espaço em disco', checked: true },
+            { id: 'registry', title: 'Otimizações de Registro', desc: '30+ tweaks de performance', checked: true },
+            { id: 'services', title: 'Desabilitar Serviços Desnecessários', desc: 'Remove 10+ serviços pesados', checked: true },
+            { id: 'network', title: 'Otimizar Rede para Streaming', desc: 'Zero throttling', checked: true },
+            { id: 'temp', title: 'Limpar Arquivos Temporários', desc: 'Remove cache e temp files', checked: true },
+            { id: 'pagefile', title: 'Otimizar Memória Virtual', desc: 'Configura PageFile perfeitamente', checked: true },
+            { id: 'defender', title: 'Exclusões no Defender', desc: 'Adiciona CapCut e OBS', checked: true },
+            { id: 'updates', title: 'Windows Update Manual', desc: 'Você controla quando atualizar', checked: true },
+            { id: 'video', title: 'Otimizações para Vídeo/GPU', desc: 'GPU Priority Level 8', checked: true },
+            { id: 'background', title: 'Desabilitar Apps em Background', desc: 'Economiza recursos', checked: true },
+            { id: 'boot', title: 'Otimizar Tempo de Boot', desc: 'Inicialização mais rápida', checked: true },
+            { id: 'priority', title: 'Prioridade Automática CapCut/OBS', desc: 'Prioridade HIGH a cada 5min', checked: true },
+            { id: 'gpu', title: 'Otimizar GPU', desc: 'Hardware Scheduling habilitado', checked: true }
+        ];
+
+        const grid = document.getElementById('options-grid');
+        const selectAllBtn = document.getElementById('select-all');
+        const deselectAllBtn = document.getElementById('deselect-all');
+        const optimizeBtn = document.getElementById('optimize-btn');
+        const progressContainer = document.getElementById('progress-container');
+        const progressBar = document.getElementById('progress-bar');
+        const statusText = document.getElementById('status-text');
+        const results = document.getElementById('results');
+        const resultsList = document.getElementById('results-list');
+
+        // Render options
+        options.forEach(opt => {
+            const div = document.createElement('div');
+            div.className = `option-item ${opt.checked ? 'active' : ''}`;
+            div.dataset.id = opt.id;
+            div.innerHTML = `
+                <div class="checkbox">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 6L9 17L4 12" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <div class="option-content">
+                    <div class="option-title">${opt.title}</div>
+                    <div class="option-desc">${opt.desc}</div>
+                </div>
+            `;
+            div.addEventListener('click', () => toggleOption(div));
+            grid.appendChild(div);
+        });
+
+        function toggleOption(element) {
+            element.classList.toggle('active');
+        }
+
+        selectAllBtn.addEventListener('click', () => {
+            document.querySelectorAll('.option-item').forEach(el => {
+                el.classList.add('active');
+            });
+        });
+
+        deselectAllBtn.addEventListener('click', () => {
+            document.querySelectorAll('.option-item').forEach(el => {
+                el.classList.remove('active');
+            });
+        });
+
+        optimizeBtn.addEventListener('click', async () => {
+            const selected = Array.from(document.querySelectorAll('.option-item.active'))
+                .map(el => el.dataset.id);
+
+            if (selected.length === 0) {
+                alert('Selecione pelo menos uma otimização!');
+                return;
+            }
+
+            if (!confirm('Isso vai otimizar profundamente o Windows!\n\nUm ponto de restauração será criado.\n\nContinuar?')) {
+                return;
+            }
+
+            // Show progress
+            progressContainer.classList.add('active');
+            results.classList.remove('active');
+            optimizeBtn.disabled = true;
+
+            try {
+                const response = await fetch('http://localhost:3000/optimize', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ options: selected })
+                });
+
+                const reader = response.body.getReader();
+                const decoder = new TextDecoder();
+
+                while (true) {
+                    const { done, value } = await reader.read();
+                    if (done) break;
+
+                    const text = decoder.decode(value);
+                    const lines = text.split('\n').filter(l => l.trim());
+
+                    lines.forEach(line => {
+                        if (line.startsWith('data: ')) {
+                            const data = JSON.parse(line.slice(6));
+                            
+                            if (data.progress !== undefined) {
+                                progressBar.style.width = data.progress + '%';
+                            }
+                            
+                            if (data.status) {
+                                statusText.textContent = data.status;
+                            }
+
+                            if (data.complete) {
+                                progressContainer.classList.remove('active');
+                                results.classList.add('active');
+                                resultsList.innerHTML = data.results.map(r => `<li>${r}</li>`).join('');
+                                
+                                if (confirm('Deseja REINICIAR o PC agora?')) {
+                                    fetch('http://localhost:3000/reboot', { method: 'POST' });
+                                }
+                            }
+                        }
+                    });
+                }
+            } catch (error) {
+                alert('Erro ao otimizar: ' + error.message);
+            } finally {
+                optimizeBtn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+{
+  "name": "windows-video-optimizer",
+  "version": "2.0.0",
+  "description": "Otimizador profissional do Windows para produção de vídeo, design e streaming",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "windows",
+    "optimization",
+    "video-editing",
+    "capcut",
+    "obs-studio",
+    "performance",
+    "streaming",
+    "davinci-resolve"
+  ],
+  "author": "Neko-chan",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

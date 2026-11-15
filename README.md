@@ -1,14 +1,17 @@
-# 🎬 Windows Video Optimizer
+# 🎬 Windows Video Optimizer v2.0
 
 <div align="center">
 
 ![Windows](https://img.shields.io/badge/Windows-10%2F11-0078D6?style=for-the-badge&logo=windows&logoColor=white)
-![PowerShell](https://img.shields.io/badge/PowerShell-5.1%2B-5391FE?style=for-the-badge&logo=powershell&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-14+-339933?style=for-the-badge&logo=node.js&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
+![Version](https://img.shields.io/badge/Version-2.0-E11D48?style=for-the-badge)
 
-**Otimizador completo do Windows para produção de vídeo, design e streaming**
+**Otimizador PROFISSIONAL do Windows com Interface Web Moderna**
 
-Focado em **CapCut**, **OBS Studio**, **DaVinci Resolve** e aplicativos de edição profissional
+Focado em **CapCut**, **OBS Studio**, **DaVinci Resolve** e produção de vídeo profissional
+
+✨ **NOVA VERSÃO**: Interface web premium + Backend Node.js + Design profissional
 
 Made with ❤️ by Neko-chan (=^･ω･^=)
 
@@ -17,6 +20,15 @@ Made with ❤️ by Neko-chan (=^･ω･^=)
 ---
 
 ## 🚀 Características
+
+### 🎨 Interface Web Moderna (NOVO v2.0)
+- **Design Profissional** - Cinema Dark + Play Red palette
+- **Soft UI Evolution** - Modern aesthetics, improved contrast
+- **Typography Premium** - Poppins + Open Sans
+- **Zero Emoji Icons** - SVG icons profissionais (Heroicons style)
+- **Smooth Animations** - 200-300ms transitions
+- **Responsive Design** - Desktop, tablet e mobile
+- **Real-time Progress** - Acompanhamento em tempo real via SSE
 
 ### ⚡ Performance Máxima
 - **Plano de Energia Otimizado** - Máximo desempenho sempre ativo
@@ -77,67 +89,93 @@ Made with ❤️ by Neko-chan (=^･ω･^=)
 ## 🖥️ Requisitos
 
 - **Windows 10** ou **Windows 11**
-- **PowerShell 5.1+** (já vem no Windows)
+- **Node.js 14+** ([Download aqui](https://nodejs.org))
 - **Permissões de Administrador**
 - **8GB RAM** mínimo (recomendado 16GB+)
+- **Navegador moderno** (Chrome, Edge, Firefox)
 
 ---
 
 ## 📥 Instalação
 
-### Método 1: Download Direto
-1. Baixe o arquivo `WindowsVideoOptimizer.ps1`
-2. Clique com o **botão direito** no arquivo
-3. Escolha **"Executar com PowerShell como Administrador"**
+### Método Rápido (Recomendado)
+1. **Clone ou baixe** este repositório
+2. Clique com o **botão direito** em `🚀 EXECUTAR AQUI.bat`
+3. Escolha **"Executar como Administrador"**
+4. O sistema irá:
+   - Verificar permissões
+   - Instalar dependências (primeira vez)
+   - Iniciar o servidor
+   - **Abrir automaticamente no navegador**
 
-### Método 2: Lançador Rápido
-1. Execute o arquivo `🚀 EXECUTAR AQUI.bat` como Administrador
-2. A interface gráfica abrirá automaticamente
+### Método Manual
+```bash
+# 1. Instalar dependências
+npm install
 
-### Método 3: PowerShell Manual
-```powershell
-# Abra PowerShell como Administrador
-Set-ExecutionPolicy Bypass -Scope Process -Force
-.\WindowsVideoOptimizer.ps1
+# 2. Iniciar servidor (como Administrador)
+node server.js
+
+# 3. Abrir navegador
+# Acesse: http://localhost:3000
 ```
 
 ---
 
 ## 🎯 Como Usar
 
-### Interface Gráfica
+### Interface Web Moderna
 
 <div align="center">
 
 ```
-┌─────────────────────────────────────────┐
-│   🎬 WINDOWS VIDEO OPTIMIZER 🎬        │
-├─────────────────────────────────────────┤
-│ ☑ Plano de Energia Máximo             │
-│ ☑ Desabilitar Hibernação              │
-│ ☑ Otimizações de Registro (30+ tweaks)│
-│ ☑ Desabilitar Serviços Desnecessários │
-│ ☑ Otimizar Rede para Streaming        │
-│ ☑ Limpar Arquivos Temporários         │
-│ ☑ Otimizar Memória Virtual            │
-│ ☑ Adicionar Exclusões no Defender     │
-│ ☑ Configurar Updates Manual           │
-│ ☑ Otimizações para Vídeo/GPU          │
-│ ☑ Desabilitar Apps em Background      │
-│ ☑ Otimizar Tempo de Boot              │
-│ ☑ Prioridade Automática CapCut/OBS    │
-│ ☑ Otimizar GPU (NVIDIA/AMD)           │
-├─────────────────────────────────────────┤
-│   [🚀 OTIMIZAR AGORA - NYA~!]         │
-└─────────────────────────────────────────┘
+┌────────────────────────────────────────────────┐
+│   🎬 Windows Video Optimizer v2.0 🎬          │
+│                                                │
+│   Interface Web Premium • Cinema Dark Theme   │
+├────────────────────────────────────────────────┤
+│                                                │
+│  ☑ Plano de Energia Máximo Desempenho        │
+│  ☑ Desabilitar Hibernação                    │
+│  ☑ Otimizações de Registro (30+ tweaks)      │
+│  ☑ Desabilitar Serviços Desnecessários       │
+│  ☑ Otimizar Rede para Streaming              │
+│  ☑ Limpar Arquivos Temporários               │
+│  ☑ Otimizar Memória Virtual                  │
+│  ☑ Adicionar Exclusões no Defender           │
+│  ☑ Windows Update Manual                     │
+│  ☑ Otimizações para Vídeo/GPU                │
+│  ☑ Desabilitar Apps em Background            │
+│  ☑ Otimizar Tempo de Boot                    │
+│  ☑ Prioridade Automática CapCut/OBS          │
+│  ☑ Otimizar GPU (NVIDIA/AMD)                 │
+│                                                │
+│   [Selecionar Tudo] [Desselecionar Tudo]     │
+│                                                │
+│          [🚀 OTIMIZAR AGORA]                  │
+│                                                │
+│   ████████████████░░░░░  75%                  │
+│   Otimizando GPU...                           │
+│                                                │
+└────────────────────────────────────────────────┘
 ```
 
 </div>
 
-1. **Selecione** as otimizações desejadas (todas marcadas por padrão)
-2. Clique em **"OTIMIZAR AGORA"**
-3. Aguarde a conclusão (1-2 minutos)
-4. **Reinicie** o PC quando solicitado
+### Passo a Passo
+
+1. **Execute** o launcher como Administrador
+2. **Aguarde** o navegador abrir automaticamente
+3. **Selecione** as otimizações desejadas (todas recomendadas)
+4. Clique em **"Otimizar Agora"**
+5. **Aguarde** a conclusão (1-3 minutos)
+6. **Reinicie** o PC quando solicitado
+
+### Durante a Otimização
+- ✅ Progress bar em tempo real
+- ✅ Status de cada etapa mostrado
+- ✅ Ponto de restauração criado automaticamente
+- ✅ Não feche a janela do terminal!
 
 ---
 
@@ -252,10 +290,31 @@ Contribuições são bem-vindas! (=^･ω･^=)
 
 ## 📝 Changelog
 
+### v2.0.0 (2025) - PROFESSIONAL EDITION ✨
+- 🎨 **NOVA** Interface Web Moderna
+  - Design profissional Cinema Dark + Play Red
+  - Soft UI Evolution com melhor contraste
+  - Typography premium: Poppins + Open Sans
+  - Zero emoji icons, só SVG profissionais
+  - Smooth animations (200-300ms)
+  - Fully responsive (mobile, tablet, desktop)
+- 🚀 **NOVO** Backend Node.js + Express
+  - Server-Sent Events para progresso em tempo real
+  - Comunicação assíncrona frontend/backend
+  - Melhor controle de execução
+- ⚡ **NOVO** PowerShell modular e otimizado
+  - Melhor feedback de progresso
+  - Execução mais rápida e confiável
+- 📦 **NOVO** Auto-launcher com verificações
+  - Verifica Node.js automaticamente
+  - Instala dependências na primeira execução
+  - Abre navegador automaticamente
+- ✅ Todas as 14 otimizações da v1.0 mantidas e aprimoradas
+
 ### v1.0.0 (2025)
 - 🎉 Release inicial
 - ✅ 14 módulos de otimização
-- ✅ Interface gráfica completa
+- ✅ Interface gráfica PowerShell Forms
 - ✅ Suporte CapCut & OBS Studio
 - ✅ Ponto de restauração automático
 - ✅ Prioridade automática de processos
