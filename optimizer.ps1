@@ -202,10 +202,22 @@ try {
 
             'defender' {
                 Send-Status "[$current/$total] Configurando Defender..."
-                Add-MpPreference -ExclusionPath "C:\Program Files\CapCut" -ErrorAction SilentlyContinue
-                Add-MpPreference -ExclusionPath "C:\Program Files\obs-studio" -ErrorAction SilentlyContinue
-                Add-MpPreference -ExclusionProcess "CapCut.exe" -ErrorAction SilentlyContinue
-                Add-MpPreference -ExclusionProcess "obs64.exe" -ErrorAction SilentlyContinue
+                # Add-MpPreference pode ter "cold start" lento (observado em teste real:
+                # > 100s na primeira chamada apos boot, quando o MpCmdRun ainda nao esta
+                # totalmente pronto). Roda em Job com timeout para nao travar o restante
+                # da otimizacao caso o servico de Defender esteja ocupado/lento.
+                $defenderJob = Start-Job -ScriptBlock {
+                    Add-MpPreference -ExclusionPath "C:\Program Files\CapCut" -ErrorAction SilentlyContinue
+                    Add-MpPreference -ExclusionPath "C:\Program Files\obs-studio" -ErrorAction SilentlyContinue
+                    Add-MpPreference -ExclusionProcess "CapCut.exe" -ErrorAction SilentlyContinue
+                    Add-MpPreference -ExclusionProcess "obs64.exe" -ErrorAction SilentlyContinue
+                }
+                $defenderDone = Wait-Job $defenderJob -Timeout 25
+                if (-not $defenderDone) {
+                    Send-Status "Defender esta demorando, continuando sem esperar..."
+                    Stop-Job $defenderJob -ErrorAction SilentlyContinue
+                }
+                Remove-Job $defenderJob -Force -ErrorAction SilentlyContinue
             }
 
             'updates' {
