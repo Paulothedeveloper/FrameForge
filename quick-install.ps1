@@ -38,36 +38,28 @@ function Invoke-NativeCommand {
     }
 }
 
-# PROTECAO: Re-executar sem profile se detectar que esta rodando com profile
-# Isso evita conflitos com profiles personalizados dos usuarios
-if ($PROFILE -and (Test-Path $PROFILE) -and -not $env:FRAMEFORGE_NO_PROFILE) {
+# AVISO (nao auto-reexecuta): detectar profile e so avisar.
+# ----------------------------------------------------------------------------
+# POR QUE NAO RE-EXECUTA SOZINHO (confirmado por reproducao em 2026-11-15):
+# A abordagem anterior tentava se auto-copiar via
+# $MyInvocation.MyCommand.ScriptBlock.ToString() e rodar de novo com -NoProfile.
+# Reproduzi isso isoladamente: quando o script roda via "irm url | iex"
+# (Invoke-Expression), $MyInvocation.MyCommand.ScriptBlock.ToString() NAO
+# retorna o conteudo do script baixado - retorna o texto do CONTEXTO que
+# chamou o iex, ou seja, o one-liner "irm .../quick-install.ps1 | iex" que o
+# usuario digitou. O "script seguro" gerado ficava so essa linha, que ao
+# rodar baixava e re-executava tudo de novo recursivamente e quebrava no meio
+# (ArgumentException em Invoke-Expression). Essa tecnica e estruturalmente
+# incompativel com o padrao de distribuicao "irm | iex".
+# O fix real (Invoke-NativeCommand acima, ErrorActionPreference=Continue ao
+# redor de comandos nativos) ja resolve a causa raiz do problema que isso
+# tentava contornar: mesmo que o profile do usuario redefina "git" como
+# funcao wrapper, a saida em stderr dela nao vira mais excecao fatal por
+# engano. Por isso aqui so avisamos, sem reexecutar.
+# ----------------------------------------------------------------------------
+if ($PROFILE -and (Test-Path $PROFILE)) {
     Write-Host ""
-    Write-Host "  🔧 Detectado PowerShell profile personalizado..." -ForegroundColor Yellow
-    Write-Host "     Re-executando sem profile para evitar conflitos..." -ForegroundColor Gray
-    Write-Host ""
-
-    $tempScript = "$env:TEMP\frameforge-install-safe.ps1"
-    $currentScript = $MyInvocation.MyCommand.ScriptBlock.ToString()
-    $safeScript = "`$env:FRAMEFORGE_NO_PROFILE = '1'" + "`n" + $currentScript
-    $safeScript | Out-File -FilePath $tempScript -Encoding UTF8 -Force
-
-    $params = @{
-        FilePath = "powershell.exe"
-        ArgumentList = @(
-            "-NoProfile",
-            "-NoExit",
-            "-ExecutionPolicy", "Bypass",
-            "-File", $tempScript
-        )
-        Verb = "RunAs"
-    }
-
-    try {
-        Start-Process @params
-        exit 0
-    } catch {
-        Write-Host "  ⚠️  Erro ao re-executar. Continuando com profile..." -ForegroundColor Yellow
-    }
+    Write-Host "  ℹ️  Detectado PowerShell profile personalizado - seguindo normalmente." -ForegroundColor Gray
 }
 
 # Banner
@@ -297,7 +289,3 @@ if ($execute -eq 'S' -or $execute -eq 's') {
 
 Write-Host "  Pressione Enter para sair..." -ForegroundColor Gray
 Read-Host
-
-if (Test-Path "$env:TEMP\frameforge-install-safe.ps1") {
-    Remove-Item "$env:TEMP\frameforge-install-safe.ps1" -Force -ErrorAction SilentlyContinue
-}
