@@ -25,16 +25,16 @@ if ($PROFILE -and (Test-Path $PROFILE) -and -not $env:FRAMEFORGE_NO_PROFILE) {
         FilePath = "powershell.exe"
         ArgumentList = @(
             "-NoProfile",
+            "-NoExit",  # IMPORTANTE: Mantém janela aberta no final
             "-ExecutionPolicy", "Bypass",
             "-File", $tempScript
         )
         Verb = "RunAs"
-        Wait = $true
     }
     
     try {
         Start-Process @params
-        Remove-Item $tempScript -Force -ErrorAction SilentlyContinue
+        # Não esperar - deixa a nova janela rodar sozinha
         exit 0
     } catch {
         Write-Host "  ⚠️  Erro ao re-executar. Continuando com profile..." -ForegroundColor Yellow
@@ -235,6 +235,12 @@ Write-Host "     4. Selecione as otimizações e clique em 'Otimizar Agora'" -Fo
 Write-Host ""
 Write-Host "  Nya~! Instalação completa! (=^･ω･^=)ฅ" -ForegroundColor Magenta
 Write-Host ""
+Write-Host ""
+
+# Beep para chamar atenção (opcional, remove se incomodar)
+[Console]::Beep(800, 200)
+Start-Sleep -Milliseconds 100
+[Console]::Beep(1000, 200)
 
 # Perguntar se quer executar agora
 $execute = Read-Host "  Deseja executar o FrameForge agora? (S/N)"
@@ -253,3 +259,8 @@ if ($execute -eq 'S' -or $execute -eq 's') {
 
 Write-Host "  Pressione Enter para sair..." -ForegroundColor Gray
 Read-Host
+
+# Limpar arquivo temporário se existir
+if (Test-Path "$env:TEMP\frameforge-install-safe.ps1") {
+    Remove-Item "$env:TEMP\frameforge-install-safe.ps1" -Force -ErrorAction SilentlyContinue
+}
