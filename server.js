@@ -5,7 +5,7 @@ const path = require('path');
 const os = require('os');
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // Lista fechada de opcoes validas — nunca interpolar entrada do cliente
 // diretamente numa string de shell. Sem isso, um POST malicioso em /optimize
@@ -53,7 +53,14 @@ app.post('/optimize', (req, res) => {
     // (confirmado em teste real: corrompe acentos mesmo com BOM e $OutputEncoding
     // configurados). O optimizer.ps1 agora escreve o progresso em um arquivo UTF-8
     // proprio, e aqui fazemos polling desse arquivo em vez de ler o stdout do processo.
-    const logFile = path.join(os.tmpdir(), `frameforge-progress-${Date.now()}.log`);
+    //
+    // O log NAO pode ficar em os.tmpdir() (%TEMP%): a propria opcao "temp" do
+    // optimizer roda "Remove-Item $env:TEMP\*" e apagava o arquivo de log que
+    // o processo estava escrevendo nesse exato momento (bug real encontrado em
+    // teste end-to-end: o SSE parava de receber progresso no meio da execucao).
+    const logDir = path.join(__dirname, '.logs');
+    if (!fs.existsSync(logDir)) fs.mkdirSync(logDir, { recursive: true });
+    const logFile = path.join(logDir, `progress-${Date.now()}.log`);
     const psArgs = options.join(',');
     const psCommand = `powershell.exe -NoProfile -ExecutionPolicy Bypass -File "${path.join(__dirname, 'optimizer.ps1')}" -Options "${psArgs}" -LogFile "${logFile}"`;
 

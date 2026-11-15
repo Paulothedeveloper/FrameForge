@@ -627,10 +627,27 @@
                                 progressContainer.classList.remove('active');
                                 results.classList.add('active');
                                 resultsList.innerHTML = data.results.map(r => `<li>${r}</li>`).join('');
-                                
-                                if (confirm('Deseja REINICIAR o PC agora?')) {
-                                    fetch('http://localhost:3000/reboot', { method: 'POST' });
+
+                                // Sem confirm() nativo aqui: um confirm() encadeado pode ser
+                                // auto-aceito por um override global de window.confirm (ex: em
+                                // teste automatizado ou extensao), disparando reboot sem intencao
+                                // real do usuario. Em vez disso, mostra um botao explicito que
+                                // exige um segundo clique humano deliberado.
+                                let rebootBtn = document.getElementById('reboot-now-btn');
+                                if (!rebootBtn) {
+                                    rebootBtn = document.createElement('button');
+                                    rebootBtn.id = 'reboot-now-btn';
+                                    rebootBtn.className = 'btn btn-primary';
+                                    rebootBtn.style.marginTop = '1rem';
+                                    rebootBtn.textContent = 'Reiniciar o PC Agora';
+                                    results.appendChild(rebootBtn);
                                 }
+                                rebootBtn.style.display = 'inline-block';
+                                rebootBtn.onclick = () => {
+                                    rebootBtn.disabled = true;
+                                    rebootBtn.textContent = 'Reiniciando em 10s...';
+                                    fetch('http://localhost:3000/reboot', { method: 'POST' });
+                                };
                             }
                         }
                     });
