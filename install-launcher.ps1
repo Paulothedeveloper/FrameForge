@@ -1,4 +1,4 @@
-# FrameForge - Launcher do Instalador (NUNCA FECHA)
+﻿# FrameForge - Launcher do Instalador (NUNCA FECHA)
 # Este script GARANTE que a janela nunca fecha, mesmo com erro
 
 # Forçar que a janela fique aberta SEMPRE
