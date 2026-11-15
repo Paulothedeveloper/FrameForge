@@ -39,7 +39,7 @@
 
 ### Método 1: One-Liner PowerShell (RECOMENDADO)
 ```powershell
-irm https://raw.githubusercontent.com/Paulothedeveloper/WindowsVideoOptimizer/main/quick-install.ps1 | iex
+irm "https://raw.githubusercontent.com/Paulothedeveloper/WindowsVideoOptimizer/main/quick-install.ps1?cb=$(Get-Random)" | iex
 ```
 
 **Proteções automáticas:**

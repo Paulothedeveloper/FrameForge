@@ -26,7 +26,7 @@
 Cole este comando no PowerShell que abriu:
 
 ```powershell
-irm https://raw.githubusercontent.com/Paulothedeveloper/WindowsVideoOptimizer/main/quick-install.ps1 | iex
+irm "https://raw.githubusercontent.com/Paulothedeveloper/WindowsVideoOptimizer/main/quick-install.ps1?cb=$(Get-Random)" | iex
 ```
 
 Aperte **Enter** e aguarde!
@@ -145,7 +145,7 @@ node : O termo 'node' não é reconhecido...
 Cole o comando **em uma linha só**:
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -NoExit -Command "irm https://raw.githubusercontent.com/Paulothedeveloper/WindowsVideoOptimizer/main/quick-install.ps1 | iex"
+powershell -NoProfile -ExecutionPolicy Bypass -NoExit -Command "irm "https://raw.githubusercontent.com/Paulothedeveloper/WindowsVideoOptimizer/main/quick-install.ps1?cb=$(Get-Random)" | iex"
 ```
 
 O `-NoExit` mantém a janela aberta mesmo com erro.
@@ -167,7 +167,7 @@ O novo instalador detecta isso e se re-executa automaticamente sem profile!
 
 **Solução Manual (se não funcionar):**
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -Command "irm https://raw.githubusercontent.com/Paulothedeveloper/WindowsVideoOptimizer/main/quick-install.ps1 | iex"
+powershell -NoProfile -ExecutionPolicy Bypass -Command "irm "https://raw.githubusercontent.com/Paulothedeveloper/WindowsVideoOptimizer/main/quick-install.ps1?cb=$(Get-Random)" | iex"
 ```
 
 ---

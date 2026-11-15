@@ -94,7 +94,7 @@ if (-not $isAdmin) {
     Write-Host ""
     Write-Host "  Depois, cole este comando novamente:" -ForegroundColor Cyan
     Write-Host ""
-    Write-Host "  irm https://raw.githubusercontent.com/Paulothedeveloper/WindowsVideoOptimizer/main/quick-install.ps1 | iex" -ForegroundColor Green
+    Write-Host "  irm `"https://raw.githubusercontent.com/Paulothedeveloper/WindowsVideoOptimizer/main/quick-install.ps1?cb=$(Get-Random)`" | iex" -ForegroundColor Green
     Write-Host ""
 
     Write-Host "  💡 ATALHO: Quer que eu tente abrir o PowerShell Admin para você?" -ForegroundColor Yellow
@@ -109,7 +109,7 @@ if (-not $isAdmin) {
         # (antes so exibia e esperava o usuario colar de novo manualmente -
         # UX ruim reportada pelo Paulo: "preciso dar dois comandos?")
         $tempScript = "$env:TEMP\frameforge-install-temp.ps1"
-        $installCommand = "irm https://raw.githubusercontent.com/Paulothedeveloper/WindowsVideoOptimizer/main/quick-install.ps1 | iex"
+        $installCommand = "irm `"https://raw.githubusercontent.com/Paulothedeveloper/WindowsVideoOptimizer/main/quick-install.ps1?cb=$(Get-Random)`" | iex"
 
         # Este arquivo e lido do disco como ARQUIVO (-File), entao Out-File
         # -Encoding UTF8 (que inclui BOM no PS 5.1) e o correto aqui -
