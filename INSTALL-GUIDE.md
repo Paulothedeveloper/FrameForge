@@ -250,8 +250,6 @@ Remove-Item -Path "$env:USERPROFILE\Desktop\FrameForge.lnk" -Force
 
 <div align="center">
 
-**Made with ❤️ and 🐱 by Neko-chan**
-
-Nya~! (=^･ω･^=)ฅ
+**FrameForge**
 
 </div>

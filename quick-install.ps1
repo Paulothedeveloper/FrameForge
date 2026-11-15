@@ -73,7 +73,7 @@ Write-Host "  ║              Instalador Rápido v2.2                          
 Write-Host "  ║                                                              ║" -ForegroundColor Magenta
 Write-Host "  ╚══════════════════════════════════════════════════════════════╝" -ForegroundColor Magenta
 Write-Host ""
-Write-Host "  Nya~! Vou te guiar na instalação! (=^･ω･^=)" -ForegroundColor Cyan
+Write-Host "  Vou te guiar na instalação!" -ForegroundColor Cyan
 Write-Host ""
 
 # Verificar se esta rodando como admin
@@ -266,7 +266,7 @@ Write-Host "     2. Escolha 'Executar como Administrador'" -ForegroundColor Whit
 Write-Host "     3. Aguarde o navegador abrir automaticamente" -ForegroundColor White
 Write-Host "     4. Selecione as otimizações e clique em 'Otimizar Agora'" -ForegroundColor White
 Write-Host ""
-Write-Host "  Nya~! Instalação completa! (=^･ω･^=)ฅ" -ForegroundColor Magenta
+Write-Host "  Instalação completa!" -ForegroundColor Magenta
 Write-Host ""
 
 [Console]::Beep(800, 200)

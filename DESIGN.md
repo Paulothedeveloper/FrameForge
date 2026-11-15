@@ -395,6 +395,5 @@ Based on **design-taste-frontend** guidelines:
 
 ---
 
-**Designed by Neko-chan using professional UI/UX skills**  
-*Following industry best practices and accessibility standards*  
-Nya~! (=^･ω･^=)
+**Designed following professional UI/UX principles**  
+*Following industry best practices and accessibility standards*

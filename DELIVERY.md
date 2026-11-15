@@ -250,7 +250,7 @@ MIT License - Veja [LICENSE](LICENSE) para detalhes
 
 ## 👤 CRÉDITOS
 
-**Criado por:** Neko-chan (=^･ω･^=)  
+**Criado por:** Paulothedeveloper  
 **Auditado com:** anti-cara-de-ia + accessibility (WCAG 2.2 AA) skills  
 **Design System:** Soft UI Evolution + Cinema Dark palette  
 **Ferramentas:** Claude Code, Git, Node.js, PowerShell  
@@ -272,9 +272,7 @@ O projeto está **100% pronto para uso**. Sugestões para o futuro:
 
 <div align="center">
 
-**Made with ❤️ and 🐱 by Neko-chan**
-
-Nya~! (=^･ω･^=)ฅ
+**FrameForge**
 
 [⭐ Dê uma estrela no GitHub](https://github.com/Paulothedeveloper/WindowsVideoOptimizer) · [🐛 Reporte bugs](https://github.com/Paulothedeveloper/WindowsVideoOptimizer/issues) · [📖 Documentação completa](README.md)
 

@@ -11,7 +11,7 @@ Write-Host "  ╔═════════════════════
 Write-Host "  ║                   FRAMEFORGE - INSTALADOR                   ║" -ForegroundColor Cyan
 Write-Host "  ╚══════════════════════════════════════════════════════════════╝" -ForegroundColor Magenta
 Write-Host ""
-Write-Host "  Nya~! Preparando instalação... (=^･ω･^=)" -ForegroundColor Cyan
+Write-Host "  Preparando instalação..." -ForegroundColor Cyan
 Write-Host ""
 
 # Verificar se está rodando como admin

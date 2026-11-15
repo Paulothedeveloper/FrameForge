@@ -6,7 +6,7 @@
     Instala automaticamente o Windows Video Optimizer com todas as dependências
 .NOTES
     Versão: 2.0.0
-    Autor: Neko-chan (=^･ω･^=)
+    Autor: Paulothedeveloper
 #>
 
 $ErrorActionPreference = "Stop"
@@ -37,7 +37,7 @@ Write-ColorOutput Magenta "  ║              Instalador Automático v2.0       
 Write-ColorOutput Magenta "  ║                                                              ║"
 Write-ColorOutput Magenta "  ╚══════════════════════════════════════════════════════════════╝"
 Write-Host ""
-Write-Info "  Nya~! Vou instalar tudo automaticamente! (=^･ω･^=)"
+Write-Info "  Vou instalar tudo automaticamente!"
 Write-Host ""
 
 # Configurações
@@ -206,9 +206,9 @@ if ($execute -eq 'S' -or $execute -eq 's') {
     # Executar o launcher
     Start-Process -FilePath "$InstallPath\EXECUTAR AQUI.bat" -Verb RunAs
     
-    Write-Success "Launcher iniciado! Nya~! (=^･ω･^=)"
+    Write-Success "Launcher iniciado!"
 } else {
-    Write-Info "OK! Use o atalho no Desktop quando quiser. Nya~! (=^･ω･^=)"
+    Write-Info "OK! Use o atalho no Desktop quando quiser."
 }
 
 Write-Host ""

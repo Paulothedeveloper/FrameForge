@@ -13,8 +13,6 @@ Forge maximum performance for **CapCut**, **OBS Studio**, **DaVinci Resolve** an
 
 **Modern web interface** · **Real-time optimization** · **Cinema Dark design**
 
-Made with ❤️ by Neko-chan (=^･ω･^=)
-
 </div>
 
 ---
@@ -305,7 +303,7 @@ Set-ExecutionPolicy Unrestricted -Force
 
 ## Contribuindo
 
-Contribuições são bem-vindas! (=^･ω･^=)
+Contribuições são bem-vindas!
 
 1. Fork o projeto
 2. Crie uma branch (`git checkout -b feature/MinhaFeature`)
@@ -358,9 +356,9 @@ Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
 ## Autor
 
-**Neko-chan** (=^･ω･^=)
+**Paulothedeveloper**
 
-- GitHub: [@WindowsVideoOptimizer](https://github.com/WindowsVideoOptimizer)
+- GitHub: [@Paulothedeveloper](https://github.com/Paulothedeveloper)
 - Inspirado pela comunidade de criadores de conteúdo
 
 ---
@@ -395,8 +393,6 @@ Se este otimizador ajudou você:
 
 <div align="center">
 
-**Made with ❤️ and 🐱 by Neko-chan**
-
-Nya~! (=^･ω･^=)ฅ
+**FrameForge** — Professional Windows Optimizer
 
 </div>
