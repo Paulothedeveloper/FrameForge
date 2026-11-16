@@ -5,82 +5,77 @@
 ![Windows](https://img.shields.io/badge/Windows-10%2F11-0078D6?style=for-the-badge&logo=windows&logoColor=white)
 ![Node.js](https://img.shields.io/badge/Node.js-14+-339933?style=for-the-badge&logo=node.js&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
-![Version](https://img.shields.io/badge/Version-2.0-F84768?style=for-the-badge)
+![Version](https://img.shields.io/badge/Version-2.1-F84768?style=for-the-badge)
 
 **Professional Windows Optimizer for Video Production**
 
-Forge maximum performance for **CapCut**, **OBS Studio**, **DaVinci Resolve** and video editing
+Forge maximum performance for **CapCut**, **OBS Studio**, **DaVinci Resolve**, **Premiere Pro** and video editing
 
-**Modern web interface** · **Real-time optimization** · **Cinema Dark design**
+**18 real optimization modules** · **Auto hardware detection** · **Smart presets** · **Real-time progress**
 
 </div>
 
 ---
 
-## Características
+## Veja em ação
 
-### Interface Web Moderna (NOVO v2.0)
-- **Design Profissional** - Cinema Dark + Play Red palette
-- **Soft UI Evolution** - Modern aesthetics, improved contrast
-- **Typography Premium** - Poppins + Open Sans
-- **Zero Emoji Icons** - SVG icons profissionais (Heroicons style)
-- **Smooth Animations** - 200-300ms transitions
-- **Responsive Design** - Desktop, tablet e mobile
-- **Real-time Progress** - Acompanhamento em tempo real via SSE
+<div align="center">
 
-### Performance Máxima
-- **Plano de Energia Otimizado** - Máximo desempenho sempre ativo
-- **CPU Prioritizada** - Processos em primeiro plano com prioridade máxima
-- **GPU Acelerada** - Hardware Scheduling habilitado
-- **Memória Otimizada** - PageFile configurado perfeitamente
+### Detecção automática de hardware + preset recomendado
+![FrameForge detectando hardware e recomendando preset](docs/showcase/hero.png)
 
-### Específico para Vídeo
-- **CapCut & OBS Studio** - Prioridade HIGH automática
-- **MMCSS Otimizado** - Sistema de agendamento multimídia configurado
-- **GPU Priority Level 8** - Máxima prioridade gráfica
-- **Zero Throttling** - Rede sem limitações
+### Otimização em tempo real
+![FrameForge otimizando com progresso ao vivo](docs/showcase/progress.png)
 
-### Seguro e Reversível
-- ✅ **Ponto de Restauração Automático**
-- ✅ **Preserva Periféricos** (áudio, vídeo, USB)
-- ✅ **Interface Gráfica Intuitiva**
-- ✅ **Seleção Individual de Otimizações**
+</div>
 
 ---
 
-## O que é Otimizado?
+## Índice
 
-### 1️⃣ Sistema
-- [x] Plano de energia máximo desempenho
-- [x] Desabilita hibernação (libera GB de espaço)
-- [x] 30+ tweaks de registro para performance
-- [x] Remove efeitos visuais desnecessários
-- [x] Otimiza tempo de boot
+- [O que é](#o-que-é)
+- [Destaques](#destaques)
+- [O que é otimizado (18 módulos)](#o-que-é-otimizado-18-módulos)
+- [Requisitos](#requisitos)
+- [Instalação](#instalação)
+- [Como usar](#como-usar)
+- [Segurança](#segurança)
+- [Como reverter](#como-reverter)
+- [FAQ](#faq)
+- [Licença](#licença)
 
-### 2️⃣ Serviços Windows
-- [x] Desabilita 10+ serviços pesados
-- [x] Windows Search desabilitado
-- [x] Xbox services removidos
-- [x] Telemetria desabilitada
-- [x] **MANTÉM**: Áudio, Vídeo, USB, Rede
+---
 
-### 3️⃣ GPU & Gráficos
-- [x] Hardware Accelerated GPU Scheduling
-- [x] Game DVR desabilitado
-- [x] Prioridade gráfica máxima
-- [x] Otimizações NVIDIA/AMD
+## O que é
 
-### 4️⃣ Rede
-- [x] Zero throttling para streaming
-- [x] TCP otimizado
-- [x] Chimney Offload habilitado
-- [x] DCA & NetDMA otimizados
+FrameForge é um otimizador de Windows com interface web local, focado em quem edita vídeo ou transmite ao vivo (CapCut, DaVinci Resolve, Premiere Pro, OBS Studio). Ele lê o hardware real da sua máquina, sugere um ponto de partida e aplica 18 otimizações reais — cada uma reversível por ponto de restauração.
 
-### 5️⃣ Aplicativos
-- [x] CapCut com prioridade HIGH automática
-- [x] OBS Studio com prioridade HIGH automática
-- [x] Exclusões no Windows Defender
-- [x] Apps em background desabilitados
+## Destaques
+
+- **Detecção real de hardware** — SSD/HDD, RAM, CPU, GPU (NVIDIA/AMD/Intel) e quais editores/streaming apps você já tem instalados, lido direto do seu PC (nada sai da máquina)
+- **Presets inteligentes** — "Máximo Desempenho", "Edição de Vídeo", "Streaming ao Vivo" e "Privacidade e Essencial", com o melhor já pré-selecionado conforme o que foi detectado
+- **18 módulos reais**, cada um testado individualmente de ponta a ponta (não é teoria — veja a seção de módulos)
+- **Interface web moderna** com progresso em tempo real via Server-Sent Events
+- **Seguro e reversível** — ponto de restauração automático antes de qualquer mudança
+- **Validado contra segurança real**: sem CORS aberto, sem injeção de comando, origem restrita a localhost
+
+---
+
+## O que é otimizado (18 módulos)
+
+| Categoria | Módulos |
+|---|---|
+| **Sistema** | Plano de energia máximo, desabilitar hibernação, 30+ tweaks de registro, otimizar boot |
+| **Disco** | Limpeza profunda (WinSxS, cache do Update, lixeira), TRIM automático em SSD / desfragmentação em HDD |
+| **Serviços** | Desabilita 12 serviços pesados (telemetria, Xbox, busca, etc.), mantém áudio/vídeo/rede/USB |
+| **Privacidade** | Reduz telemetria e rastreamento, Windows Update em modo manual |
+| **Memória** | PageFile calculado automaticamente com base na sua RAM |
+| **GPU** | Hardware Scheduling, tweaks específicos por fabricante (NVIDIA/AMD) |
+| **Rede** | Zero throttling, TCP otimizado para streaming |
+| **Apps** | Exclusões no Defender e prioridade automática para CapCut/OBS |
+| **Inicialização** | Remove apps pesados conhecidos do boot |
+
+> Todos os 18 módulos foram testados individualmente em hardware real, um por vez, com monitoramento de estabilidade entre cada teste. Dois módulos (limpeza de disco via DISM e exclusões do Defender) são conhecidos por levar mais tempo — a interface avisa quando isso acontece, para não parecer travado.
 
 ---
 
@@ -88,8 +83,7 @@ Forge maximum performance for **CapCut**, **OBS Studio**, **DaVinci Resolve** an
 
 - **Windows 10** ou **Windows 11**
 - **Node.js 14+** ([Download aqui](https://nodejs.org))
-- **Permissões de Administrador**
-- **8GB RAM** mínimo (recomendado 16GB+)
+- **Permissões de Administrador** (apenas para aplicar as otimizações — a detecção de hardware funciona sem admin)
 - **Navegador moderno** (Chrome, Edge, Firefox)
 
 ---
@@ -98,298 +92,79 @@ Forge maximum performance for **CapCut**, **OBS Studio**, **DaVinci Resolve** an
 
 ### Método 1: Instalação Automática via PowerShell (RECOMENDADO)
 
-**One-liner - Cole no PowerShell como Administrador:**
+**One-liner — Cole no PowerShell como Administrador:**
 
 ```powershell
-irm https://raw.githubusercontent.com/Paulothedeveloper/WindowsVideoOptimizer/main/quick-install.ps1 | iex
+irm https://raw.githubusercontent.com/Paulothedeveloper/FrameForge/main/quick-install.ps1 | iex
 ```
 
-> 💡 **Nota:** O instalador detecta automaticamente se você não está como Admin e te ajuda a abrir corretamente!
-
 O instalador vai:
-- ✅ Verificar e instalar Git (se necessário)
-- ✅ Verificar e instalar Node.js 14+ (se necessário)
-- ✅ Clonar o repositório em `%LOCALAPPDATA%\WindowsVideoOptimizer`
-- ✅ Instalar dependências npm automaticamente
-- ✅ Criar atalho no Desktop
-- ✅ Criar ponto de restauração do sistema
-- ✅ Perguntar se deseja executar imediatamente
+- Verificar e instalar Git e Node.js 14+ (se necessário)
+- Clonar o repositório em `%LOCALAPPDATA%\FrameForge`
+- Instalar dependências npm automaticamente
+- Criar atalho no Desktop e um ponto de restauração do sistema
 
-**Como executar:**
-1. Pressione `Win + X` e escolha **"Windows PowerShell (Admin)"** ou **"Terminal (Admin)"**
-2. Cole o comando acima
-3. Aguarde a instalação (1-3 minutos)
-4. Pronto! Use o atalho no Desktop
+### Método 2: Instalação Manual
 
----
-
-### Método 2: Instalação Manual (Clone do Repositório)
-1. **Clone ou baixe** este repositório
-2. Clique com o **botão direito** em `EXECUTAR AQUI.bat`
-3. Escolha **"Executar como Administrador"**
-4. O sistema irá:
-   - Verificar permissões
-   - Instalar dependências (primeira vez)
-   - Iniciar o servidor
-   - **Abrir automaticamente no navegador**
-
-### Método Manual
 ```bash
-# 1. Instalar dependências
+git clone https://github.com/Paulothedeveloper/FrameForge.git
+cd FrameForge
 npm install
-
-# 2. Iniciar servidor (como Administrador)
 node server.js
-
-# 3. Abrir navegador
 # Acesse: http://localhost:3000
 ```
 
----
-
-## Como Usar
-
-### Interface Web Moderna
-
-<div align="center">
-
-```
-┌────────────────────────────────────────────────┐
-│   🎬 Windows Video Optimizer v2.0 🎬          │
-│                                                │
-│   Interface Web Premium • Cinema Dark Theme   │
-├────────────────────────────────────────────────┤
-│                                                │
-│  ☑ Plano de Energia Máximo Desempenho        │
-│  ☑ Desabilitar Hibernação                    │
-│  ☑ Otimizações de Registro (30+ tweaks)      │
-│  ☑ Desabilitar Serviços Desnecessários       │
-│  ☑ Otimizar Rede para Streaming              │
-│  ☑ Limpar Arquivos Temporários               │
-│  ☑ Otimizar Memória Virtual                  │
-│  ☑ Adicionar Exclusões no Defender           │
-│  ☑ Windows Update Manual                     │
-│  ☑ Otimizações para Vídeo/GPU                │
-│  ☑ Desabilitar Apps em Background            │
-│  ☑ Otimizar Tempo de Boot                    │
-│  ☑ Prioridade Automática CapCut/OBS          │
-│  ☑ Otimizar GPU (NVIDIA/AMD)                 │
-│                                                │
-│   [Selecionar Tudo] [Desselecionar Tudo]     │
-│                                                │
-│          [🚀 OTIMIZAR AGORA]                  │
-│                                                │
-│   ████████████████░░░░░  75%                  │
-│   Otimizando GPU...                           │
-│                                                │
-└────────────────────────────────────────────────┘
-```
-
-</div>
-
-### Passo a Passo
-
-1. **Execute** o launcher como Administrador
-2. **Aguarde** o navegador abrir automaticamente
-3. **Selecione** as otimizações desejadas (todas recomendadas)
-4. Clique em **"Otimizar Agora"**
-5. **Aguarde** a conclusão (1-3 minutos)
-6. **Reinicie** o PC quando solicitado
-
-### Durante a Otimização
-- ✅ Progress bar em tempo real
-- ✅ Status de cada etapa mostrado
-- ✅ Ponto de restauração criado automaticamente
-- ✅ Não feche a janela do terminal!
+Para aplicar otimizações reais, rode `node server.js` numa janela de terminal aberta **como Administrador**.
 
 ---
 
-## Avisos Importantes
+## Como usar
 
-### O QUE FAZ
-- Otimiza profundamente o Windows
-- Melhora drasticamente a performance
-- Configura sistema para produção de vídeo
-- **Cria ponto de restauração automático**
-
-### O QUE NÃO FAZ
-- **NÃO** remove drivers
-- **NÃO** mexe em periféricos de áudio/vídeo
-- **NÃO** desinstala programas
-- **NÃO** altera arquivos pessoais
-
-### Segurança
-- Windows Update fica em **modo manual** (você controla)
-- Windows Defender **permanece ativo** (com exclusões para CapCut/OBS)
-- Todos os periféricos **preservados**
+1. Abra `http://localhost:3000` — o hardware é detectado automaticamente em segundos
+2. Veja o preset recomendado (ou escolha outro manualmente)
+3. Ajuste quais otimizações aplicar individualmente, se quiser
+4. Clique em **Otimizar Agora** e acompanhe o progresso em tempo real
+5. Ao final, você decide se quer reiniciar o PC (nunca acontece sozinho)
 
 ---
 
-## Como Reverter
+## Segurança
 
-### Método 1: Ponto de Restauração
-1. Pressione `Win + R`
-2. Digite: `rstrui.exe`
-3. Escolha: **"Video Optimizer - Antes"**
-4. Restaure o sistema
-
-### Método 2: Manual (se precisar)
-```powershell
-# Reabilitar serviços importantes
-Set-Service -Name "wuauserv" -StartupType Automatic
-Set-Service -Name "WSearch" -StartupType Automatic
-
-# Reativar plano de energia balanceado
-powercfg /setactive 381b4222-f694-41f0-9685-ff5bb260df2e
-```
+- **Ponto de restauração automático** antes de cada execução (com timeout de segurança — nunca trava a otimização indefinidamente)
+- **Servidor restrito a localhost**: nenhuma origem externa consegue acionar uma otimização pelo seu navegador
+- **Lista fechada de opções válidas** no backend — nenhuma entrada do cliente chega a ser executada como comando
+- **Windows Defender permanece ativo** (apenas exclusões de pasta para CapCut/OBS são adicionadas)
+- **Nada é desinstalado, nenhum driver é removido, nenhum arquivo pessoal é tocado**
 
 ---
 
-## Aplicativos Suportados
+## Como reverter
 
-### Totalmente Otimizado
-- **CapCut** (Prioridade HIGH)
-- **OBS Studio** (Prioridade HIGH)
-- **DaVinci Resolve**
-- **Adobe Premiere Pro**
-- **After Effects**
-- **Vegas Pro**
-- **Filmora**
-- **Streamlabs OBS**
-
-### Melhorias Gerais
-- Todos os editores de vídeo
-- Software de transmissão
-- Aplicativos de design (Photoshop, Illustrator)
-- Engines 3D (Blender, Cinema 4D)
-
----
-
-## Benchmarks
-
-### Antes vs Depois (Testes Reais)
-
-| Métrica | Antes | Depois | Melhoria |
-|---------|-------|--------|----------|
-| **Render 4K (5min)** | 18min 34s | 12min 47s | **31% mais rápido** |
-| **OBS Streaming FPS** | 52 FPS | 60 FPS | **15% melhor** |
-| **RAM Disponível** | 4.2 GB | 6.8 GB | **62% mais livre** |
-| **Boot Time** | 42s | 28s | **33% mais rápido** |
-| **CPU Idle** | 12% | 3% | **75% menos uso** |
-
-*Testado em: Ryzen 7 5800X, RTX 3070, 32GB RAM*
-
----
-
-## Troubleshooting
-
-### PowerShell não abre?
-```powershell
-# Execute como Administrador:
-Set-ExecutionPolicy Unrestricted -Force
-```
-
-### Erro de permissão?
-- Clique com **botão direito**
-- Escolha **"Executar como Administrador"**
-- Aceite o UAC (controle de conta)
-
-### Script bloqueado pelo Windows?
-- Clique em **"Mais informações"**
-- Clique em **"Executar assim mesmo"**
-- Ou use o arquivo `.bat` incluído
-
----
-
-## Contribuindo
-
-Contribuições são bem-vindas!
-
-1. Fork o projeto
-2. Crie uma branch (`git checkout -b feature/MinhaFeature`)
-3. Commit suas mudanças (`git commit -m 'Add: Nova feature'`)
-4. Push para a branch (`git push origin feature/MinhaFeature`)
-5. Abra um Pull Request
-
----
-
-## Changelog
-
-### v2.0.0 (2025) - PROFESSIONAL EDITION ✨
-- 🎨 **NOVA** Interface Web Moderna
-  - Design profissional Cinema Dark + Play Red
-  - Soft UI Evolution com melhor contraste
-  - Typography premium: Poppins + Open Sans
-  - Zero emoji icons, só SVG profissionais
-  - Smooth animations (200-300ms)
-  - Fully responsive (mobile, tablet, desktop)
-- 🚀 **NOVO** Backend Node.js + Express
-  - Server-Sent Events para progresso em tempo real
-  - Comunicação assíncrona frontend/backend
-  - Melhor controle de execução
-- ⚡ **NOVO** PowerShell modular e otimizado
-  - Melhor feedback de progresso
-  - Execução mais rápida e confiável
-- 📦 **NOVO** Auto-launcher com verificações
-  - Verifica Node.js automaticamente
-  - Instala dependências na primeira execução
-  - Abre navegador automaticamente
-- ✅ Todas as 14 otimizações da v1.0 mantidas e aprimoradas
-
-### v1.0.0 (2025)
-- 🎉 Release inicial
-- ✅ 14 módulos de otimização
-- ✅ Interface gráfica PowerShell Forms
-- ✅ Suporte CapCut & OBS Studio
-- ✅ Ponto de restauração automático
-- ✅ Prioridade automática de processos
-
----
-
-## Licença
-
-Este projeto está sob a licença **MIT**.
-
-Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
-
----
-
-## Autor
-
-**Paulothedeveloper**
-
-- GitHub: [@Paulothedeveloper](https://github.com/Paulothedeveloper)
-- Inspirado pela comunidade de criadores de conteúdo
-
----
-
-## Apoie o Projeto
-
-Se este otimizador ajudou você:
-- ⭐ Dê uma **estrela** no GitHub
-- 🔀 **Compartilhe** com outros criadores
-- 🐛 Reporte **bugs** e **sugestões**
+1. Pressione `Win + R`, digite `rstrui.exe`
+2. Escolha o ponto de restauração criado pelo FrameForge
+3. Restaure o sistema
 
 ---
 
 ## FAQ
 
-### É seguro usar?
-**Sim!** O script cria um ponto de restauração antes de qualquer mudança.
+**É seguro usar?** Sim — cria um ponto de restauração antes de qualquer mudança, e todo o código está neste repositório para auditar.
 
-### Vai quebrar meu Windows?
-**Não!** Todas as mudanças são reversíveis e testadas.
+**Preciso ter CapCut/OBS/DaVinci instalados?** Não. O FrameForge detecta o que você tem e recomenda um preset, mas você pode rodar qualquer módulo mesmo sem esses apps instalados.
 
-### Funciona em notebooks?
-**Sim!** Funciona em desktops e notebooks. Em notebooks, o plano de energia será ajustado.
+**Funciona em notebooks?** Sim. O plano de energia é ajustado adequadamente.
 
-### Preciso ter CapCut/OBS instalado?
-**Não!** O script otimiza o sistema mesmo sem os programas. As otimizações funcionam para qualquer software de vídeo.
-
-### Posso rodar novamente depois?
-**Sim!** Pode executar quantas vezes quiser.
+**Posso rodar de novo depois?** Sim, quantas vezes quiser.
 
 ---
+
+## Licença
+
+MIT — veja [LICENSE](LICENSE).
+
+## Autor
+
+**Paulothedeveloper** — [@Paulothedeveloper](https://github.com/Paulothedeveloper)
 
 <div align="center">
 
