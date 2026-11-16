@@ -21,11 +21,9 @@ Forge maximum performance for **CapCut**, **OBS Studio**, **DaVinci Resolve**, *
 
 <div align="center">
 
-### Detecção automática de hardware + preset recomendado
-![FrameForge detectando hardware e recomendando preset](docs/showcase/hero.png)
+![Demo: detecção de hardware, preset automático e otimização em tempo real](docs/showcase/demo.gif)
 
-### Otimização em tempo real
-![FrameForge otimizando com progresso ao vivo](docs/showcase/progress.png)
+*Da detecção de hardware ao fim da otimização — gravado direto do app rodando.*
 
 </div>
 
