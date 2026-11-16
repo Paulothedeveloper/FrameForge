@@ -425,6 +425,9 @@
                     <div class="progress-bar" id="progress-bar"></div>
                 </div>
                 <p class="status-text" id="status-text">Preparando otimização...</p>
+                <p class="status-hint" id="status-hint" style="display:none; opacity:0.7; font-size:0.85rem; margin-top:0.5rem;">
+                    Algumas etapas (como limpeza profunda de disco) podem levar vários minutos. Isso é normal, não interrompa.
+                </p>
             </div>
 
             <div class="results" id="results">
@@ -593,6 +596,12 @@
             progressContainer.classList.add('active');
             results.classList.remove('active');
             optimizeBtn.disabled = true;
+
+            // Avisa quando houver modulo conhecido por ser lento, para nao
+            // parecer travado (diskcleanup com DISM pode levar varios minutos).
+            const slowModules = ['diskcleanup', 'ssdopt'];
+            document.getElementById('status-hint').style.display =
+                selected.some(id => slowModules.includes(id)) ? 'block' : 'none';
 
             try {
                 const response = await fetch('http://localhost:3000/optimize', {
