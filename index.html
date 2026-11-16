@@ -102,6 +102,49 @@
             gap: 1rem;
         }
 
+        /* Hardware Grid */
+        .hardware-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 0.75rem;
+        }
+
+        .hardware-item {
+            background: rgba(15, 15, 35, 0.5);
+            border: 1px solid #0C0C0D;
+            border-radius: 10px;
+            padding: 0.75rem 1rem;
+        }
+
+        .hardware-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            opacity: 0.6;
+            margin-bottom: 0.25rem;
+        }
+
+        .hardware-value {
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .app-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            font-size: 0.8rem;
+            padding: 0.3rem 0.6rem;
+            border-radius: 999px;
+            background: rgba(255,255,255,0.06);
+            margin: 0.15rem;
+        }
+
+        .app-tag.found {
+            background: rgba(225, 29, 72, 0.12);
+            color: var(--cta);
+        }
+
         .preset-item {
             background: rgba(15, 15, 35, 0.5);
             border: 1px solid #0C0C0D;
@@ -383,6 +426,15 @@
         </header>
 
         <main>
+            <div class="card" id="hardware-card">
+                <h2 style="margin-bottom: 0.5rem; font-size: 1.5rem;">Hardware Detectado</h2>
+                <p class="subtitle" style="margin-bottom: 1.25rem;">Lido automaticamente da sua máquina — nenhuma informação sai do seu PC</p>
+                <div id="hardware-grid" class="hardware-grid">
+                    <p style="opacity:0.6;">Detectando hardware...</p>
+                </div>
+                <p id="hardware-recommendation" style="display:none; margin-top:1rem; font-size:0.9rem; color: var(--cta);"></p>
+            </div>
+
             <div class="card">
                 <h2 style="margin-bottom: 0.5rem; font-size: 1.5rem;">Presets de Otimização</h2>
                 <p class="subtitle" style="margin-bottom: 1.25rem;">Escolha um ponto de partida para o seu uso e ajuste manualmente depois</p>
@@ -557,6 +609,84 @@
 
         // Preset "Maximo Desempenho" reflete o estado inicial (tudo marcado)
         document.querySelector('.preset-item[data-id="max"]').classList.add('selected');
+
+        // Deteccao de hardware: roda na carga da pagina, sem precisar de admin.
+        // Recomenda um preset com base nos apps de video/streaming encontrados,
+        // mas nunca forca: so pre-seleciona o que o usuario pode trocar depois.
+        (async () => {
+            const hwGrid = document.getElementById('hardware-grid');
+            const hwRec = document.getElementById('hardware-recommendation');
+            try {
+                const res = await fetch('/hardware');
+                if (!res.ok) throw new Error('falha na deteccao');
+                const hw = await res.json();
+
+                const diskLabel = hw.diskType === 'SSD' ? 'SSD' : hw.diskType === 'HDD' ? 'HDD' : 'Não identificado';
+                const apps = [
+                    { key: 'davinci', label: 'DaVinci Resolve' },
+                    { key: 'premiere', label: 'Premiere Pro' },
+                    { key: 'capcut', label: 'CapCut' },
+                    { key: 'obs', label: 'OBS Studio' }
+                ];
+                const appTags = apps.map(a =>
+                    `<span class="app-tag ${hw.apps && hw.apps[a.key] ? 'found' : ''}">${hw.apps && hw.apps[a.key] ? '✓' : '—'} ${a.label}</span>`
+                ).join('');
+
+                hwGrid.innerHTML = `
+                    <div class="hardware-item">
+                        <div class="hardware-label">Disco (C:)</div>
+                        <div class="hardware-value">${diskLabel}</div>
+                    </div>
+                    <div class="hardware-item">
+                        <div class="hardware-label">Memória RAM</div>
+                        <div class="hardware-value">${hw.ramGB ? hw.ramGB + ' GB' : 'Não identificado'}</div>
+                    </div>
+                    <div class="hardware-item">
+                        <div class="hardware-label">Processador</div>
+                        <div class="hardware-value">${hw.cpuName || 'Não identificado'}</div>
+                    </div>
+                    <div class="hardware-item">
+                        <div class="hardware-label">GPU</div>
+                        <div class="hardware-value">${(hw.gpu && hw.gpu.name) || 'Não identificado'}</div>
+                    </div>
+                    <div class="hardware-item" style="grid-column: 1 / -1;">
+                        <div class="hardware-label">Apps de vídeo/streaming encontrados</div>
+                        <div style="margin-top:0.25rem;">${appTags}</div>
+                    </div>
+                `;
+
+                // Recomendacao: edicao de video tem prioridade sobre streaming
+                // quando ambos os tipos de app estao presentes, pois o preset
+                // "editing" ja cobre GPU/disco/boot que streaming tambem usa.
+                const hasEditing = hw.apps && (hw.apps.davinci || hw.apps.premiere || hw.apps.capcut);
+                const hasStreaming = hw.apps && hw.apps.obs;
+                let recommendedId = null;
+                let recommendedText = '';
+
+                if (hasEditing && hasStreaming) {
+                    recommendedId = 'editing';
+                    recommendedText = '💡 Detectamos apps de edição e de streaming. Recomendamos o preset "Edição de Vídeo" primeiro — ele já cobre GPU, disco e boot que o streaming também usa.';
+                } else if (hasEditing) {
+                    recommendedId = 'editing';
+                    recommendedText = '💡 Detectamos um editor de vídeo instalado. Recomendamos o preset "Edição de Vídeo".';
+                } else if (hasStreaming) {
+                    recommendedId = 'streaming';
+                    recommendedText = '💡 Detectamos o OBS Studio instalado. Recomendamos o preset "Streaming ao Vivo".';
+                }
+
+                if (recommendedId) {
+                    const presetEl = document.querySelector(`.preset-item[data-id="${recommendedId}"]`);
+                    const presetObj = presets.find(p => p.id === recommendedId);
+                    if (presetEl && presetObj) {
+                        applyPreset(presetObj);
+                    }
+                    hwRec.textContent = recommendedText;
+                    hwRec.style.display = 'block';
+                }
+            } catch (e) {
+                hwGrid.innerHTML = '<p style="opacity:0.6;">Não foi possível detectar o hardware automaticamente. Selecione um preset manualmente.</p>';
+            }
+        })();
 
         function toggleOption(element) {
             element.classList.toggle('active');

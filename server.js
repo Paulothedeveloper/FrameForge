@@ -32,6 +32,23 @@ app.use(express.json());
 app.use(localOnly);
 app.use(express.static(__dirname));
 
+// Deteccao de hardware/apps instalados: so leitura, nao precisa de admin,
+// roda assim que a pagina abre (antes mesmo da elevacao do servidor).
+app.get('/hardware', (req, res) => {
+    const psCommand = `powershell.exe -NoProfile -ExecutionPolicy Bypass -File "${path.join(__dirname, 'hardware-detect.ps1')}"`;
+    exec(psCommand, { cwd: __dirname, timeout: 10000, maxBuffer: 2 * 1024 * 1024 }, (err, stdout) => {
+        if (err) {
+            return res.status(500).json({ error: 'Falha ao detectar hardware' });
+        }
+        try {
+            const data = JSON.parse(stdout.trim());
+            res.json(data);
+        } catch (e) {
+            res.status(500).json({ error: 'Resposta de deteccao invalida' });
+        }
+    });
+});
+
 // Optimization endpoint with Server-Sent Events
 app.post('/optimize', (req, res) => {
     const requested = Array.isArray(req.body.options) ? req.body.options : [];
